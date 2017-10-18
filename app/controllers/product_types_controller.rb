@@ -1,9 +1,10 @@
 class ProductTypesController < ApplicationController
 
+  before_action :set_all_product_types, only: [:index, :show]
   before_action :set_product_type, only: [:show]
   
   def index
-  	@product_types = ProductType.all
+  	# @product_types = ProductType.all
   end
 
   def new
@@ -28,6 +29,10 @@ class ProductTypesController < ApplicationController
 
   def product_type_params
   	params.require(:product_type).permit(:title)
+  end
+
+  def set_all_product_types
+    @product_types = ProductType.all
   end
 
   def set_product_type
