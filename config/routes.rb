@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
-  resources :products
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  
+  #get 'product_types/index'
+
+  #get 'product_types/new'
+
+  #get 'product_types/show'
+
+  # в ресурсе :product_types вводим вложенный ресурс :products
+  resources :product_types do
+  	resources :products
+  end
+  
 end

@@ -1,0 +1,12 @@
+<%= form_for(@product_type)  do |f| %>
+
+  <div class="form-group">
+    <%= f.label :title, "Новый раздел меню" %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Создать', class: 'btn btn-primary' %> или <%= link_to 'вернуться', :back %>
+  </div>
+
+<% end %>
