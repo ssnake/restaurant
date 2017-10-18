@@ -52,3 +52,15 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+# gem for translate device messages to russian
+gem 'devise-i18n'
+# russian formats gem (time, date///)
+gem 'russian'
+# integrate bootstrap
+gem 'bootstrap-sass'
+# icons gem
+gem 'font-awesome-rails'
+# add jquery
+gem 'jquery-rails'
