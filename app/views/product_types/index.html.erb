@@ -1,8 +1,31 @@
 <h1>Наше меню</h1>
 
 Для добавления нового блюда войдите в нужную категорию меню<br/>
+
 <%= link_to 'Все меню |', product_types_path %>
 
 <%= render partial: 'product_types/product_type', collection: @product_types, as: 'product_type' %>
 <%= link_to fa_icon(' plus-square') + ' добавить вид меню', new_product_type_path %>
 <%#= link_to 'удалить', product_type_path, method: :delete, data: { confirm: 'Вы уверены?' } %>
+
+<hr/>
+
+<div id="products_table">
+  <table class="table table-border table-hover">
+    <thead>
+      <tr>
+        <th>Блюдо</th>
+        <th>Описание</th>
+        <th>Стоимость, грн</th>
+        <th></th>
+      </tr>
+    </thead>
+      
+<!-- рендерим через партиал полный список всех типов блюд -->
+<%= render partial: 'products/product_table', collection: @products_all %>
+       
+    </table>
+  </div>
+
+
+

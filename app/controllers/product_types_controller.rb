@@ -5,7 +5,7 @@ class ProductTypesController < ApplicationController
   before_action :set_products_by_product_type, only: [:show]
   
   def index
-  	# @product_types = ProductType.all
+  	@products_all = Product.all.order('title ASC')
   end
 
   def new
