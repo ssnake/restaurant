@@ -1,5 +1,6 @@
 <h1>Наше меню по категориям</h1>
 
-<%#= link_to 'просмотр категорий', product_type_path %>
+<%= link_to 'Все меню |', product_types_path %>
+
 <%= render partial: 'product_types/product_type', collection: @product_types, as: 'product_type' %>
 <%= link_to fa_icon(' plus-square') + ' добавить вид меню', new_product_type_path %>
