@@ -2,6 +2,7 @@ class ProductTypesController < ApplicationController
 
   before_action :set_all_product_types, only: [:index, :show]
   before_action :set_product_type, only: [:show]
+  before_action :set_products_by_product_type, only: [:show]
   
   def index
   	# @product_types = ProductType.all
@@ -37,6 +38,10 @@ class ProductTypesController < ApplicationController
 
   def set_product_type
     @product_type = ProductType.find(params[:id])
+  end
+
+  def set_products_by_product_type
+    @products_by_product_type = @product_type.products.order('title ASC')
   end
 
 end

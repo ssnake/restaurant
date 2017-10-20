@@ -16,19 +16,11 @@ class ProductsController < ApplicationController
 
     @product_type = ProductType.find(params[:product_type_id])
     @new_product = @product_type.products.build(product_params)
-    @new_product.save
-    redirect_to product_type_path(id: @product_type.id), notice: @new_product.inspect
-    #@product = Product.new(product_params)
-
-    #respond_to do |format|
-    #  if @product.save
-    #    format.html { redirect_to @product, notice: 'Product was successfully created.' }
-    #    format.json { render :show, status: :created, location: @product }
-    #  else
-    #    format.html { render :new }
-    #    format.json { render json: @product.errors, status: :unprocessable_entity }
-    #  end
-    #end
+    if @new_product.save
+      redirect_to product_type_path(id: @product_type.id), notice: 'Блюдо добавлено в меню'
+    else
+      render 'new'
+    end
   end
 
 
