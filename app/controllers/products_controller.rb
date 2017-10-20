@@ -28,13 +28,14 @@ class ProductsController < ApplicationController
 
 
   def edit
-
+    @product = @product_type.products.find(params[:id])
   end
 
 
   def update
+    @product = @product_type.products.find(params[:id])    
     if @product.update(product_params)
-      redirect_to product_type_path, method: :patch, notice: 'Блюдо обновлено в меню'
+      redirect_to product_types_path, method: :patch, notice: 'Блюдо обновлено в меню'
     else
       render 'edit', alert: 'Что то пошло не так'
     end
