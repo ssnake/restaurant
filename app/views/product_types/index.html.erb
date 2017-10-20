@@ -1,12 +1,11 @@
 <h1>Наше меню</h1>
 
-Для добавления нового блюда войдите в нужную категорию меню<br/>
+Для добавления нового блюда или редактирования раздела войдите в нужную категорию меню<br/>
 
 <%= link_to 'Все меню |', product_types_path %>
 
 <%= render partial: 'product_types/product_type', collection: @product_types, as: 'product_type' %>
 <%= link_to fa_icon(' plus-square') + ' добавить вид меню', new_product_type_path %>
-<%#= link_to 'удалить', product_type_path, method: :delete, data: { confirm: 'Вы уверены?' } %>
 
 <hr/>
 
