@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  #before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product_type, only: [:new, :create, :show, :edit, :update, :destroy]
 
   
   def index
@@ -8,43 +8,35 @@ class ProductsController < ApplicationController
 
   
   def new
-    @product_type = ProductType.find(params[:product_type_id])
+
   end
 
 
   def create
-
-    @product_type = ProductType.find(params[:product_type_id])
     @new_product = @product_type.products.build(product_params)
     if @new_product.save
       redirect_to product_type_path(id: @product_type.id), notice: 'Блюдо добавлено в меню'
     else
-      render 'new'
+      render 'new', alert: 'Что то пошло не так'
     end
   end
 
 
   def show
+    @product = @product_type.products.find(params[:id])
   end
 
 
-  # GET /products/1/edit
   def edit
+
   end
 
 
-
-  # PATCH/PUT /products/1
-  # PATCH/PUT /products/1.json
   def update
-    respond_to do |format|
-      if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-        format.json { render :show, status: :ok, location: @product }
-      else
-        format.html { render :edit }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
+    if @product.update(product_params)
+      redirect_to product_type_path, method: :patch, notice: 'Блюдо обновлено в меню'
+    else
+      render 'edit', alert: 'Что то пошло не так'
     end
   end
 
@@ -60,8 +52,8 @@ class ProductsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
+    def set_product_type
+      @product_type = ProductType.find(params[:product_type_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
