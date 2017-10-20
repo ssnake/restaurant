@@ -3,6 +3,8 @@
   			product_type_product_path(product_type_id: product_table.product_type_id, 
   			id: product_table.id) %></th>
   <th><%= product_table.description %></th>
-  <th><%= product_table.price %>, грн</th>
-  <th> <%= link_to 'Редактировать', edit_product_type_product_path(product_type_id: product_table.product_type_id, id: product_table.id) %> <> </th>
+  <th><%= product_table.price %> грн</th>
+  <th>
+  	<%= link_to 'Редактировать', edit_product_type_product_path(product_type_id: product_table.product_type_id, id: product_table.id) %>|
+  	<%= link_to 'Удалить', product_type_product_path(product_type_id: product_table.product_type_id, id: product_table.id), method: :delete, data: { confirm: 'Вы уверены что хотите удалить блюдо?' } %>
 </tr>
