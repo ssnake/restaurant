@@ -1,4 +1,6 @@
-<%= form_for [@product_type, product], url: product_type_products_path(product_type_id: @product_type.id) do |form| %>
+<%= form_for @new_product, url: product_type_products_path(product_type_id: @new_product.product_type_id) do |form| %>
+  <!-- рендерим форму для вывода ошибок валидации -->
+  <%= render partial: 'partials/form_errors', locals: {model: @new_product} %>
 
   <div class="field">
     <%= form.label :title %>

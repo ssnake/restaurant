@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
 
   
   def new
-    @product = @product_type.products.build
+    @new_product = @product_type.products.build
   end
 
 

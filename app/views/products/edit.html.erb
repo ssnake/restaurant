@@ -2,4 +2,4 @@
 
 <%= render partial: 'products/form_edit', locals: {product: @product} %>
 
-<%= link_to 'Back', :back %>
+<%= link_to 'Back', product_type_path(id: @product_type.id) %>
