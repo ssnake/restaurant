@@ -11,4 +11,8 @@
 </ul>
 
 <%= link_to 'Edit', edit_cart_path(@cart) %> |
-<%= link_to 'Back', :back %>
+<%= link_to 'Back', :back %> | 
+<br/><br/>
+<%= button_to 'Очистить корзину заказа', cart_path(@cart), method: :delete,
+	datd: {confirm: 'Вы уверены что хотите очистить корзину заказа?'}, 
+	class: 'btn btn-danger btn-sm' %>

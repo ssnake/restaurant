@@ -56,9 +56,12 @@ class CartsController < ApplicationController
   # DELETE /carts/1
   # DELETE /carts/1.json
   def destroy
-    @cart.destroy
+    # удалить корзину если ее id совпадает с id корзины в сессии
+    # чтобы не удалиласть корзина другого пользователя
+    @cart.destroy if @cart.id == session[:cart_id]
+    session[:cart_id] = nil
     respond_to do |format|
-      format.html { redirect_to carts_url, notice: 'Cart was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Ваша корзина заказа очищена' }
       format.json { head :no_content }
     end
   end
