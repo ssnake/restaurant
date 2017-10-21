@@ -64,3 +64,5 @@ gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 # add jquery
 gem 'jquery-rails'
+# add gem for authentication
+gem 'devise'
