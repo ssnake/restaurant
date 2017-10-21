@@ -6,9 +6,12 @@
       <%= link_to 'admin panel mode', product_types_path, class: 'navbar-brand', id: 'navbar-admin' %>
     <% end %>
 
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <% if user_login %>
+          <%= link_to 'Моя корзина', cart_path(id: session[:cart_id]) %>
+        <% end %>
  
       <ul class="nav navbar-nav">
+
       </ul>
     
       <ul class="nav navbar-nav navbar-right">
