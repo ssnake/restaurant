@@ -1,7 +1,9 @@
 class ProductsController < ApplicationController
   before_action :set_product_type, only: [:new, :create, :show, :edit, :update, :destroy]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-
+  
+  # для действий требуем аутентифицировать юзера
+  before_action :authenticate_user!
   
   def index
     @products = Product.all

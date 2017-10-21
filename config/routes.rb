@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  devise_for :users
   # общая точка входа
   root to: 'product_types#index'
   get '/' => 'product_types#index'
