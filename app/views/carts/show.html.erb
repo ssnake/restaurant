@@ -1,14 +1,22 @@
-<!-- <p id="notice"><%= notice %></p> -->
 <h2>Меню вашего предварительного заказа</h2>
 <br/>
 
-<ul>
+<table class="table table-bordered">
   <% @cart.line_items.each do |item| %>
-  	<li>
-  	  <%= item.product.title %> - <%= item.quantity %> шт.
-  	</li>
+    <tr>
+      <td><%= item.product.title %></td>
+      <td><%= item.quantity %> шт</td>
+      <td class="item_price"><%= item.total_price %> грн</td>
+    </tr>
   <% end %>
-</ul>
+  <tr class="total_line">
+  	<td cosplan="2">Итого</td>
+  	<td class=:total_cell><%= @cart.total_price %> грн</td>
+  </tr>
+
+</table>
+
+
 
 <%= link_to 'Edit', edit_cart_path(@cart) %> |
 <%= link_to 'Back', :back %> | 
