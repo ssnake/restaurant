@@ -4,13 +4,18 @@
   			id: product_table.id) %></th>
   <th><%= product_table.description %></th>
   <th><%= product_table.price %> грн</th>
-  <th>
-  	<%= link_to fa_icon('pencil-square-o') + 'ред.', 
-  		edit_product_type_product_path(product_type_id: product_table.product_type_id, 
-  		id: product_table.id) %>|
-  	<%= link_to fa_icon('times') + 'удалить', 
-  		product_type_product_path(product_type_id: product_table.product_type_id, 
-  		id: product_table.id), method: :delete, style: "color: red",
-  		data: { confirm: 'Вы уверены что хотите удалить блюдо?' } %>
-  </th>
+
+  <!-- элементы управления доступны, если юзер - админ -->
+  <% if user_admin %>
+    <th>
+  	  <%= link_to fa_icon('pencil-square-o') + 'ред.', 
+  		  edit_product_type_product_path(product_type_id: product_table.product_type_id, 
+  		  id: product_table.id) %>|
+  	  <%= link_to fa_icon('times') + 'удалить', 
+  		  product_type_product_path(product_type_id: product_table.product_type_id, 
+  		  id: product_table.id), method: :delete, style: "color: red",
+  		  data: { confirm: 'Вы уверены что хотите удалить блюдо?' } %>
+    </th>
+  <% end %>
+  
 </tr>

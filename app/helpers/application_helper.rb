@@ -4,5 +4,12 @@ module ApplicationHelper
   def fa_icon
     content_tag 'span', '', class: "fa fa-#{icon_class}"
   end
+
+# проверка выполнен ли вход и является ли юзер админом
+  def user_admin
+  	if user_signed_in? and current_user.admin == true
+  	  return true
+  	end
+  end
   
 end

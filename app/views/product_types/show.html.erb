@@ -7,10 +7,12 @@
 <!-- рендерим партиал с типом меню + ссылку для добавления еще одного типа меню -->
 <%= render partial: 'product_types/product_type', collection: @product_types, as: 'product_type' %>
 
-<%= link_to fa_icon('plus-square') + ' добавить вид меню', new_product_type_path %>|
-<%= link_to fa_icon('pencil-square-o') + 'ред.', edit_product_type_path %>
-<%= link_to fa_icon('window-close-o') + 'удал.', product_type_path, method: :delete, 
+<% if user_admin %>
+  <%= link_to fa_icon('plus-square') + ' добавить вид меню', new_product_type_path %>|
+  <%= link_to fa_icon('pencil-square-o') + 'ред.', edit_product_type_path %>
+  <%= link_to fa_icon('window-close-o') + 'удал.', product_type_path, method: :delete, 
     data: {confirm: 'Вы уверены? Все блюда из этого раздела меню будут также удалены'} %>
+<% end %>
 
 <hr/>
 
