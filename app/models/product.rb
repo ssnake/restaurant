@@ -10,6 +10,10 @@ class Product < ApplicationRecord
   validates :description, length: { maximum: 255, message: 'Описание блюда должно быть не длиннее 255 символов' }
   validates :price, numericality: { greater_than: 0, message: 'Значение стоимости должно быть числом, и больше ноля' }
 
+  has_many :line_items
+
+  # перед удалением проверяем отсутствие товара в соед. таблице
+  before_destroy :ensure_not_references_by_any_line_item
 
   private
 
