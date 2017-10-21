@@ -1,5 +1,7 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  # выдаем исключение если кто то пытается зайти в несуществующую корзину в строке браузера
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   # GET /carts
   # GET /carts.json
@@ -70,5 +72,11 @@ class CartsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_params
       params.fetch(:cart, {})
+    end
+
+    # выдаем исключение при неправильно указанной корзине с блюдами
+    def invalid_cart
+      logger.error "Неверно указано меню заказа #{params[:id]}"
+      redirect_to root_path, alert: 'Некорректно указано меню предзаказа'
     end
 end
