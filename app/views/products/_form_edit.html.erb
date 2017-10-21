@@ -1,21 +1,24 @@
 <%= form_for @product, url: product_type_product_path(product_type_id: @product.product_type_id) do |form| %>
 
+  <!-- рендерим форму для вывода ошибок валидации -->
+  <%= render partial: 'partials/form_errors', locals: {model: @product} %>
+
   <div class="field">
-    <%= form.label :title %>
+    <%= form.label :title, 'Название блюда' %>
     <%= form.text_field :title %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
+    <%= form.label :description, 'Краткое описание' %>
     <%= form.text_area :description %>
   </div>
 
   <div class="field">
-    <%= form.label :price %>
+    <%= form.label :price, 'Стоимость, грн' %>
     <%= form.text_field :price %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Обновить', class: 'btn btn-success' %>
   </div>
 <% end %>

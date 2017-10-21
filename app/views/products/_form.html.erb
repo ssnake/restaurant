@@ -3,21 +3,21 @@
   <%= render partial: 'partials/form_errors', locals: {model: @new_product} %>
 
   <div class="field">
-    <%= form.label :title %>
+    <%= form.label :title, 'Название блюда' %>
     <%= form.text_field :title %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
+    <%= form.label :description, 'Краткое описание' %>
     <%= form.text_area :description %>
   </div>
 
   <div class="field">
-    <%= form.label :price %>
+    <%= form.label :price, 'Стоимость, грн' %>
     <%= form.text_field :price %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Создать', class: 'btn btn-primary' %>
   </div>
 <% end %>
