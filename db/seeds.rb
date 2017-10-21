@@ -23,4 +23,7 @@ ProductType.create!(title: 'Напитки')
   Product.create!(title: 'Кофе', description: 'Американо', price: 6.55, product_type_id: 4)
   Product.create!(title: 'Кофе', description: 'заварной', price: 10, product_type_id: 4)
 
+User.create!(name: 'admin', email: 'admin@gmail.com', password: 'password', 
+  password_confirmation: 'password', admin: true)
+
 
