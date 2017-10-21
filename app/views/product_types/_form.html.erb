@@ -1,4 +1,6 @@
 <%= form_for(@product_type)  do |f| %>
+  <!-- рендерим форму для вывода ошибок валидации -->
+  <%= render partial: 'partials/form_errors', locals: {model: @product_type} %>
 
   <div class="form-group">
     <%= f.label :title, "Новый раздел меню" %>
