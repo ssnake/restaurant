@@ -2,6 +2,9 @@
   <div class="container">
 
     <%= link_to 'Restaurant "Developers Life"', product_types_path, class: 'navbar-brand', color: "#ff0033" %>
+    <% if user_admin %>
+      <%= link_to 'admin panel mode', product_types_path, class: 'navbar-brand', id: 'navbar-admin' %>
+    <% end %>
 
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
  
@@ -10,7 +13,7 @@
     
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <li id="header_name">Здравствуйте, <%= current_user.name %> </li>
+          <li id="header_name">Здравствуйте, <%= current_user.name %>  | </li>
           <%= link_to 'Выйти', destroy_user_session_path, :method => :delete, class: "btn btn-primary btn-sm active" %>
         <% else %>
           <div class="btn-group" role="group" aria-label="Basic example">
