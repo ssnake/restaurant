@@ -3,6 +3,9 @@ class ProductTypesController < ApplicationController
   before_action :set_all_product_types, only: [:index, :show]
   before_action :set_product_type, only: [:show, :edit, :update, :destroy]
   before_action :set_products_by_product_type, only: [:show]
+
+  # выводим исключение если неверно указан id категории меню
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_product_type
   
 
   def index
@@ -63,6 +66,12 @@ class ProductTypesController < ApplicationController
 
   def set_products_by_product_type
     @products_by_product_type = @product_type.products.order('title ASC')
+  end
+
+  # выдаем исключение при неправильно указанном типе меню
+  def invalid_product_type
+    logger.error "Неверно указана категория меню #{params[:id]}"
+    redirect_to root_path, alert: 'Некорректно указана категория меню'
   end
 
 end

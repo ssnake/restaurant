@@ -1,6 +1,9 @@
 class ProductsController < ApplicationController
   before_action :set_product_type, only: [:new, :create, :show, :edit, :update, :destroy]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+
+  # выводим исключение если неверно указан id категории меню
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_product
   
   # для действий требуем аутентифицировать юзера
   before_action :authenticate_user!
@@ -66,6 +69,12 @@ class ProductsController < ApplicationController
 
     def product_params
       params.require(:product).permit(:title, :description, :price)
+    end
+
+    # выдаем исключение при неправильно указанно блюдо
+    def invalid_product
+      logger.error "Неверно указано блюдо #{params[:id]}"
+      redirect_to root_path, alert: 'Некорректно указано блюдо'
     end
 
 end
