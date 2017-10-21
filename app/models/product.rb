@@ -22,5 +22,6 @@ class Product < ApplicationRecord
   	  errors.add(:base, 'существуют такие позиции блюд')
   	  return false
   	end
+  end
 
 end
