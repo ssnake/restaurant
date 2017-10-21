@@ -1,10 +1,26 @@
 class Product < ApplicationRecord
   # создание связи один ко многим - следовать за product_type
   belongs_to :product_type
+  # имеет много записей связывающей таблицы
+  has_many :line_items
 
   # определяем методы валидации продукта
   validates :title, presence: { message: 'Название не может быть пустым' }
   validates :title, length: { maximum: 30, message: 'Название не может быть длиннее 30 символов' }
   validates :description, length: { maximum: 255, message: 'Описание блюда должно быть не длиннее 255 символов' }
   validates :price, numericality: { greater_than: 0, message: 'Значение стоимости должно быть числом, и больше ноля' }
+
+
+  private
+
+  # убеждаемся в отсутствии позиций данного блюда в соединительной таблице заказов
+  # чтобы не удалить блюдо из меню, в то время когда его заказали
+  def ensure_not_references_by_any_line_item
+  	if line_items.empty?
+  	  return true
+  	else
+  	  errors.add(:base, 'существуют такие позиции блюд')
+  	  return false
+  	end
+
 end
