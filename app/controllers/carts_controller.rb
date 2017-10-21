@@ -76,7 +76,7 @@ class CartsController < ApplicationController
 
     # выдаем исключение при неправильно указанной корзине с блюдами
     def invalid_cart
-      logger.error "Неверно указано меню заказа #{params[:id]}"
+      logger.error "Попытка доступа к несуществующей корзине заказа #{params[:id]}"
       redirect_to root_path, alert: 'Некорректно указано меню предзаказа'
     end
 end

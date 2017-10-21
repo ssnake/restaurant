@@ -70,7 +70,7 @@ class ProductTypesController < ApplicationController
 
   # выдаем исключение при неправильно указанном типе меню
   def invalid_product_type
-    logger.error "Неверно указана категория меню #{params[:id]}"
+    logger.error "Попытка доступа к несуществующей категории меню #{params[:id]}"
     redirect_to root_path, alert: 'Некорректно указана категория меню'
   end
 

@@ -73,7 +73,7 @@ class ProductsController < ApplicationController
 
     # выдаем исключение при неправильно указанно блюдо
     def invalid_product
-      logger.error "Неверно указано блюдо #{params[:id]}"
+      logger.error "Попытка доступа к несуществующему блюду #{params[:id]}"
       redirect_to root_path, alert: 'Некорректно указано блюдо'
     end
 
