@@ -4,7 +4,7 @@
   			product_type_product_path(product_type_id: product_table.product_type_id, 
   			id: product_table.id) %></th>
   <th><%= product_table.description %></th>
-  <th><%= product_table.price %> грн</th>
+  <th><%= my_number_to_currency(product_table.price) %></th>
 
   <!-- элементы управления доступны, если юзер - админ -->
   <% if user_admin %>

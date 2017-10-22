@@ -1,0 +1,20 @@
+<h2>Меню вашего предварительного заказа</h2>
+<br/>
+
+<table class="table table-bordered">
+  <%= render(cart.line_items) %>
+  <tr class="total_line">
+  	<td colspan="2"><b>Итого</b></td>
+  	<td class="total_cell"><b><%= my_number_to_currency(@cart.total_price) %> грн</b></td>
+  </tr>
+
+</table>
+
+
+
+<%= link_to 'Edit', edit_cart_path(@cart) %> |
+<%= link_to 'Back', :back %> | 
+<br/><br/>
+<%= button_to 'Очистить корзину заказа', cart_path(@cart), method: :delete,
+	data: {confirm: 'Вы уверены что хотите очистить корзину заказа?'}, 
+	class: 'btn btn-danger btn-sm' %>

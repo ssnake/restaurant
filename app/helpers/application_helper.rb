@@ -19,4 +19,10 @@ module ApplicationHelper
   	end
   end
   
+  # устанавливаем свое форматирование цены через метод I18n number_to_currency
+  def my_number_to_currency(number)
+    number_to_currency(number, :unit => "грн ", :separator => ".", :delimiter => " ")
+  end
+
+
 end
