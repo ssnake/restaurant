@@ -25,5 +25,8 @@ ProductType.create!(title: 'Напитки')
 
 User.create!(name: 'admin', email: 'admin@gmail.com', password: 'password', 
   password_confirmation: 'password', admin: true)
-
+User.create!(name: '1', email: '1@gmail.com', password: '111111', 
+  password_confirmation: '111111')
+User.create!(name: '2', email: '2@gmail.com', password: '222222', 
+  password_confirmation: '222222')
 
