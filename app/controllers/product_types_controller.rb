@@ -1,4 +1,7 @@
 class ProductTypesController < ApplicationController
+  # устанавливаем текущую корзину при старте корневого для юзера контроллера
+  include CurrentCart
+  before_action :set_cart
 
   before_action :set_all_product_types, only: [:index, :show]
   before_action :set_product_type, only: [:show, :edit, :update, :destroy]
