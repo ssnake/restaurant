@@ -15,4 +15,13 @@ class Order < ApplicationRecord
   	self.email = user.email
   end
 
+  def set_price(cart)
+    item = LineItem.where(cart_id: cart.id)
+    total = 0
+    item.each do |i|
+      total += (i.product.price * i.quantity)
+    end
+    self.price = total
+  end
+
 end

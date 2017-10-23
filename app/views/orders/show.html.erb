@@ -28,5 +28,7 @@
 Заказано:
 <br/>
 <%= render partial: 'orders/order', collection: @my_order, as: 'order' %>
+-------------<br/>
+Итого: <%= my_number_to_currency(@order.price) %><br/>
 
 <%= link_to 'На главную', root_path %>

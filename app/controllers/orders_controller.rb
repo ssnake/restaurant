@@ -35,7 +35,10 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
+    # устанавливаем имя и емаил из юзера
     @order.set_order_attr(current_user)
+    # подбиваем тотал стоимости, все данные из бд дергаем через id корзины
+    @order.set_price(@cart)
     @order.save
     set_order_id_and_drop_cart_id
     #@a = LineItem
