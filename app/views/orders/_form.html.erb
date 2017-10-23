@@ -12,26 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :order_name %>
+    <%= form.label :notice, 'Тут вы можете оставить комментарии к Вашему заказу' %>
+    <%= form.text_field :notice %>
   </div>
 
   <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email, id: :order_email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :notice %>
-    <%= form.text_field :notice, id: :order_notice %>
-  </div>
-
-  <div class="field">
-    <%= form.label :pay_type %>
-    <%= form.text_field :pay_type, id: :order_pay_type %>
+    <%= form.label :pay_type, 'Как будете расплачиваться' %>
+    <%= form.select :pay_type, Order::PAYMENT_TYPES %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Отправить заказ', class: 'btn btn-success btn-sm' %>
   </div>
 <% end %>

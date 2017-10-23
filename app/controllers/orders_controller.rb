@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  # устанавливаем корзину
   include CurrentCart
   before_action :set_cart, only: [:new, :create]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
@@ -16,6 +17,11 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
+    # выбиваем ошибку при попытке создать заказ с пустой корзиной
+    if @cart.line_items.empty?
+      redirect_to root_path, alert: 'Нельзя создавать заказ с пустой корзиной'
+      return
+    end
     @order = Order.new
   end
 
