@@ -12,3 +12,4 @@ class LineItem < ApplicationRecord
   validates :quantity, numericality: { greater_than: 0.1, message: 'Значение стоимости должно быть целым числом, и больше ноля' }
   validates :quantity, numericality:  {only_integer: true}
 end
+
