@@ -2,7 +2,7 @@ class LineItemsController < ApplicationController
   # подключаем созданный модуль по обнаружению корзины
   include CurrentCart
   # установить корзину перед записью туда блюда
-  before_action :set_cart, only: [:create]
+  before_action :set_cart, only: [:create, :edit]
 
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 

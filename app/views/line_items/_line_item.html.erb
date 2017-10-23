@@ -1,5 +1,8 @@
 <tr>
   <td><%= line_item.product.title %></td>
   <td><%= line_item.quantity %> шт</td>
-  <td class="item_price"><%= my_number_to_currency(line_item.total_price) %> грн</td>
+  <td class="item_price"><%= my_number_to_currency(line_item.total_price) %>
+  <%= link_to 'ред', edit_line_item_path(line_item) %>
+   удал
+  </td>
 </tr>
