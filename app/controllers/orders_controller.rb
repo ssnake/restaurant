@@ -13,13 +13,15 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @my_order = LineItem.where(order_id: @order.id)
+
   end
 
   # GET /orders/new
   def new
     # выбиваем ошибку при попытке создать заказ с пустой корзиной
     if @cart.line_items.empty?
-      redirect_to root_path, alert: 'Нельзя создавать заказ с пустой корзиной'
+      redirect_to root_path, alert: 'Нельзя создавать заказ с пустой корзиной, купите же что нибудь!'
       return
     end
     @order = Order.new
@@ -34,19 +36,22 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.set_order_attr(current_user)
-    @order.add_line_items_from_cart(@cart)
+    @order.save
+    set_order_id_and_drop_cart_id
+    #@a = LineItem
+    #@order.add_line_items_from_cart(@cart)
 
     respond_to do |format|
-      if @order.save
-        Cart.destroy(session[:cart_id])
-        session[:cart_id] = nil
-        format.html { redirect_to root_path, notice: 'Спасибо за Ваш заказ!' }
+    #  if @order.save
+    #    Cart.destroy(session[:cart_id])
+    #    session[:cart_id] = nil
+        format.html { redirect_to order_path(@order.id), notice: 'Спасибо за Ваш заказ!' }
         format.json { render :show, status: :created, location: @order }
-      else
-        @cart = current_cart
-        format.html { render :new }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    #  else
+    #    @cart = current_cart
+    #    format.html { render :new }
+    #    format.json { render json: @order.errors, status: :unprocessable_entity }
+    #  end
     end
   end
 
@@ -83,5 +88,10 @@ class OrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.require(:order).permit(:notice, :pay_type)
+    end
+
+    def set_order_id_and_drop_cart_id
+      item = LineItem.where(cart_id: @cart.id)
+      item.update_all(order_id: @order.id, cart_id: nil)
     end
 end

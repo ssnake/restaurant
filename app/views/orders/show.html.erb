@@ -1,24 +1,31 @@
-<p id="notice"><%= notice %></p>
+<h3>Данные Вашего заказа:</h3>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Номер заказа:</strong>
+  <%= @order.id %>
+</p>
+
+<p>
+  <strong>Имя:</strong>
   <%= @order.name %>
 </p>
 
 <p>
-  <strong>Email:</strong>
+  <strong>Почта:</strong>
   <%= @order.email %>
 </p>
 
 <p>
-  <strong>Notice:</strong>
+  <strong>Комментарии:</strong>
   <%= @order.notice %>
 </p>
 
 <p>
-  <strong>Pay type:</strong>
+  <strong>Тип оплаты:</strong>
   <%= @order.pay_type %>
 </p>
+
+<%= render partial: 'orders/order' %>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>
