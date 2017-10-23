@@ -33,8 +33,9 @@
     <hr/>
     <%= debug(params) if Rails.env.development? %> 
     <hr/>
-    <%= @product.inspect %>
-    <%= @product_types.inspect %>
+    <%= @product.inspect %><br/>
+    <%= @product_types.inspect %><br/>
+    Cart: <%= @cart.inspect %>
   </div>
   
   </body>

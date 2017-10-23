@@ -1,4 +1,6 @@
 class StoreController < ApplicationController
+  include CurrentCart
+  before_action :set_cart
   def index
   	@product_types = ProductType.all
   	@products_all = Product.order(:title)
