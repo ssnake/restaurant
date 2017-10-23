@@ -1,0 +1,14 @@
+<!-- под названием product_table в данном партиале проходят экземпляры product -->
+<tr>
+  <th><%= product_table.title %></th>
+  <th><%= product_table.description %></th>
+  <th><%= my_number_to_currency(product_table.price) %></th>
+
+  <!-- кнопки для заказа доступны, если юзер выполнил вход и не является админом -->
+  <% if user_login %>
+    <th>
+      <%= button_to 'В корзину', line_items_path(product_id: product_table.id) %>
+    </th>
+  <% end %>
+  
+</tr>

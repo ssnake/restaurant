@@ -1,0 +1,30 @@
+<h1>Наше меню</h1> - для юзеров
+
+<br/>
+
+<%= link_to 'Все меню |', store_index_path %>
+
+<%= render partial: 'store/store_product_type', collection: @product_types, as: 'product_type' %>
+
+
+<hr/>
+
+<div id="products_table">
+  <table class="table table-border table-hover">
+    <thead>
+      <tr>
+        <th>Блюдо</th>
+        <th>Описание</th>
+        <th>Стоимость, грн</th>
+        <th></th>
+      </tr>
+    </thead>
+      
+    <!-- рендерим через партиал полный список всех типов блюд -->
+    <%= render partial: 'store/product_table', collection: @products_all %>
+       
+    </table>
+  </div>
+
+
+

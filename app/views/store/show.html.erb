@@ -1,0 +1,31 @@
+<h1>Наше меню по категориям: <%= @product_type.title %></h1> - для юзеров
+
+<br/>
+
+<%= link_to 'Все меню |', store_index_path %>
+
+<!-- рендерим партиал с типом меню + ссылку для добавления еще одного типа меню -->
+<%= render partial: 'store/store_product_type', collection: @product_types, as: 'product_type' %>
+
+<hr/>
+
+<div id="products_table">
+  <table class="table table-border table-hover">
+    <thead>
+      <tr>
+        <th>Блюдо</th>
+        <th>Описание</th>
+        <th>Стоимость, грн</th>
+        <th></th>
+      </tr>
+    </thead>
+      
+    <!-- рендерим через партиал список меню данного типа -->
+    <%= render partial: 'store/product_table', collection: @products_by_product_type %>
+       
+    </table>
+  </div>
+
+
+<!-- рендерим ссылку для добавления еще одного компонента меню -->
+<%= link_to 'Новое блюдо', new_product_type_product_path(product_type_id: @product_type.id) %>
