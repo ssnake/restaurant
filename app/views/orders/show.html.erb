@@ -25,7 +25,8 @@
   <%= @order.pay_type %>
 </p>
 
-<%= render partial: 'orders/order' %>
+Заказано:
+<br/>
+<%= render partial: 'orders/order', collection: @my_order, as: 'order' %>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+<%= link_to 'На главную', root_path %>
