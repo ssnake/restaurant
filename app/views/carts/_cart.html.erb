@@ -11,10 +11,10 @@
 </table>
 
 
-
-<%= link_to 'Edit', edit_cart_path(@cart) %> |
 <%= link_to 'Back', :back %> | 
 <br/><br/>
 <%= button_to 'Очистить корзину заказа', cart_path(@cart), method: :delete,
 	data: {confirm: 'Вы уверены что хотите очистить корзину заказа?'}, 
-	class: 'btn btn-danger btn-sm' %>
+	class: 'btn btn-danger btn-sm' %> |
+<%= button_to 'Оформить заказ', new_order_path, method: :get,
+	class: 'btn btn-success btn-sm' %> |
