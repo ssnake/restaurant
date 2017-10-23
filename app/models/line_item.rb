@@ -6,4 +6,9 @@ class LineItem < ApplicationRecord
   def total_price
   	product.price * quantity
   end
+
+  # валидации количества
+  validates :quantity, presence: {message: "введите количество!"}
+  validates :quantity, numericality: { greater_than: 0, message: 'Значение стоимости должно быть целым числом, и больше ноля' }
+  validates :quantity, numericality:  {only_integer: true}
 end
