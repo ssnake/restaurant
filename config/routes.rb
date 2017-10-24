@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   
+  root to: 'store#index'
+
   resources :members
   resources :joiners
   resources :groups
   resources :orders
-  root to: 'store#index'
-
   resources :store, only: [:index, :show]
-  get 'store/show'
+  resources :line_items
+  resources :carts
 
   devise_for :users
   # общая точка входа
@@ -19,8 +20,7 @@ Rails.application.routes.draw do
   	resources :products
   end
 
-  resources :line_items
-  resources :carts
+
 
   
 end

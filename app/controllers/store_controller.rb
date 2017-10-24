@@ -16,7 +16,7 @@ class StoreController < ApplicationController
   end
 
 
-
+### сделать отдельный group+store_controller
   private
 
     def set_all_groups
