@@ -40,8 +40,9 @@
 
     <!-- моя зона отладки -->
     <% if Rails.env.development? %> 
-      <%= current_user.inspect %>
-      <%= @group.inspect %>
+      <%= @joiners.inspect %><br/>
+      <%= @group.inspect %><br/>
+      <%= @member.inspect %><br/>
     <% end %>
   </div>
   

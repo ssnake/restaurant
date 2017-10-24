@@ -51,10 +51,8 @@ class JoinersController < ApplicationController
   # DELETE /joiners/1.json
   def destroy
     @joiner.destroy
-    respond_to do |format|
-      format.html { redirect_to joiners_url, notice: 'Joiner was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to group_path(@joiner.group_id), 
+      alert: 'Запрос ' + @joiner.user.name + ' на добавление в группу удален'
   end
 
   private

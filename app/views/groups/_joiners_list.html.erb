@@ -1,1 +1,7 @@
-- <%= joiner.user.name %><br/>
+- <%= joiner.user.name %> | 
+<%= link_to fa_icon('check') + 'Подтвердить запрос', 
+	members_path(group_id: joiner.group_id, user_id: joiner.user_id), method: :post,
+	style: "color: green" %> |
+	<%= link_to fa_icon('remove') + 'Отклонить запрос', joiner_path(joiner.id), 
+	method: :delete, style: "color: red" %>
+<br/>
