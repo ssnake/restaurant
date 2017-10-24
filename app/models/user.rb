@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, presence: { message: 'Имя не может быть пустым' }
+  
   has_one :cart
+  has_many :groups
   
 end

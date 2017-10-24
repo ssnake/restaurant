@@ -2,6 +2,13 @@
 
 <br/>
 
+<% if current_user %>
+  Группы наших заказчиков: 
+  <%#= render %> | <%= link_to 'Создать группу', new_group_path %>
+<% end %>
+
+<hr/>
+
 <%= link_to 'Все меню |', store_index_path %>
 
 <%= render partial: 'store/store_product_type', collection: @product_types, as: 'product_type' %>
