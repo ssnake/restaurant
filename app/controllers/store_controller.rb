@@ -1,6 +1,9 @@
 class StoreController < ApplicationController
   include CurrentCart
   before_action :set_cart
+
+  before_action :set_all_groups
+  
   def index
   	@product_types = ProductType.all
   	@products_all = Product.order(:title)
@@ -13,5 +16,11 @@ class StoreController < ApplicationController
   end
 
 
+
+  private
+
+    def set_all_groups
+      @all_groups = Group.all.order('name ASC')
+    end
 
 end

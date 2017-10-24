@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:new, :create]
+
 
   # GET /groups
   # GET /groups.json
@@ -14,7 +16,8 @@ class GroupsController < ApplicationController
 
   # GET /groups/new
   def new
-    @group = Group.new
+    #@group = Group.new
+    @new_group = @user.groups.build
   end
 
   # GET /groups/1/edit
@@ -25,15 +28,14 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     #@group = Group.new(group_params)
-    @new_group = @user.groups.build
-
+    @new_group = @user.groups.build(group_params)
     respond_to do |format|
-      if @group.save
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
+      if @new_group.save
+        format.html { redirect_to @new_group, notice: 'Группа создана! Вы можете ей управлять' }
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
+        format.json { render json: @new_group.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -72,4 +74,9 @@ class GroupsController < ApplicationController
     def group_params
       params.require(:group).permit(:name)
     end
+
+    def set_user
+      @user = current_user
+    end
+
 end
