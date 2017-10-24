@@ -8,14 +8,17 @@ module CurrentCart
 
   # устанавливаем текущую корзину 
   def set_cart
-  	if user_signed_in?
-      @cart = Cart.where(user_id: current_user.id)
-      if @cart = nil
-        @cart = Cart.new
-        @cart.user_id = current_user.id
-        @cart.save
+
+      if user_signed_in? == true
+        if current_user.cart != nil
+          @cart = current_user.cart
+        else
+          @cart = Cart.new
+          @cart.user_id = current_user.id
+          @cart.save
+        end
       end
-    end
+ 
   end
 
 
