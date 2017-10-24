@@ -3,8 +3,9 @@
 <br/>
 
 <% if current_user %>
-  Группы наших заказчиков: 
-  <%#= render %> | <%= link_to 'Создать группу', new_group_path %>
+  Группы наших заказчиков: <br/>
+  <%= render partial: 'groups/group_list', collection: @all_groups, as: 'group' %> | 
+  <%= link_to fa_icon(' plus-square') + 'Создать группу', new_group_path %>
 <% end %>
 
 <hr/>
