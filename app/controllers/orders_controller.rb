@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   # устанавливаем корзину
   include CurrentCart
-  before_action :set_cart, only: [:new, :create]
+  before_action :set_current_or_new_cart, only: [:new, :create]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
@@ -96,5 +96,25 @@ class OrdersController < ApplicationController
     def set_order_id_and_drop_cart_id
       item = LineItem.where(cart_id: @cart.id)
       item.update_all(order_id: @order.id, cart_id: nil)
+    end
+
+
+
+
+
+
+
+
+
+        ##############
+    def set_current_or_new_cart
+      if user_signed_in?
+        @cart = Cart.where(user_id: current_user.id)
+        if @cart = nil
+          @cart = Cart.new
+          @cart.user_id = current_user.id
+          @cart.save
+        end
+      end
     end
 end

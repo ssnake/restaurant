@@ -17,7 +17,7 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_login %>
           <li id="cart-button">
-            <%= link_to 'Мой заказ', cart_path(id: @cart.id) if @cart %>
+            <%#= link_to 'Мой заказ', cart_path(id: @cart.id) if @cart %>
           </li>
         <% end %>
         <% if user_signed_in? %>

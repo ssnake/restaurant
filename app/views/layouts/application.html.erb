@@ -38,9 +38,14 @@
     <hr/>
     <%= debug(params) if Rails.env.development? %> 
     <hr/>
-    <%= @product.inspect %><br/>
-    <%= @product_types.inspect %><br/>
-    Cart: <%= @cart.inspect %>
+
+    <!-- моя зона отладки -->
+    <% if Rails.env.development? %> 
+      from user <%= current_user.cart.inspect if user_signed_in? %><br/>
+      <%#= @product_types.inspect %><br/>
+      Cart: <%= @cart.inspect %>
+      User_signed? <%= user_signed_in? %>
+    <% end %>
   </div>
   
   </body>

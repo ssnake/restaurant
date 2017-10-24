@@ -2,7 +2,7 @@ class LineItemsController < ApplicationController
   # подключаем созданный модуль по обнаружению корзины
   include CurrentCart
   # установить корзину перед записью туда блюда
-  before_action :set_cart, only: [:index, :create, :edit, :update]
+  before_action :set_current_or_new_cart, only: [:index, :create, :edit, :update]
 
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 
@@ -84,5 +84,20 @@ class LineItemsController < ApplicationController
 
     def line_item_quantity_params
       params.require(:line_item).permit(:quantity)
+    end
+
+
+
+
+    ##############
+    def set_current_or_new_cart
+      if user_signed_in?
+        @cart = Cart.where(user_id: current_user.id)
+        if @cart = nil
+          @cart = Cart.new
+          @cart.user_id = current_user.id
+          @cart.save
+        end
+      end
     end
 end
