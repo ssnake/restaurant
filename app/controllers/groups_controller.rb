@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:new, :create]
+  before_action :set_joiners, only: [:show]
 
 
   # GET /groups
@@ -77,6 +78,10 @@ class GroupsController < ApplicationController
 
     def set_user
       @user = current_user
+    end
+
+    def set_joiners
+      @joiners = Joiner.where(group_id: @group.id)
     end
 
 end

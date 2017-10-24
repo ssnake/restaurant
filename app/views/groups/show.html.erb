@@ -9,6 +9,10 @@
 </p>
 
 <% if current_user.id == @group.user_id %>
+  Подали запрос на вступление в группу:<br/>
+  <%= render partial: 'groups/joiners_list', collection: @joiners, as: 'joiner' %>
+  <hr/>
+
   <%= link_to 'Редактировать', edit_group_path(@group) %> |
 <% end %>
 
