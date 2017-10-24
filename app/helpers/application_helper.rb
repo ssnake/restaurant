@@ -25,4 +25,10 @@ module ApplicationHelper
   end
 
 
+  # проверка что текущий юзер уже подал заявку в эту группу
+  def current_user_already_send_join_to_group
+    Joiner.where(user_id: current_user.id, group_id: @group.id).exists?
+  end
+
+
 end

@@ -42,7 +42,7 @@
     <% if Rails.env.development? %> 
       <%= @joiners.inspect %><br/>
       <%= @group.inspect %><br/>
-      <%= @member.inspect %><br/>
+      <%= current_user.inspect %><br/>
     <% end %>
   </div>
   

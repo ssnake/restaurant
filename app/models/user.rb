@@ -9,5 +9,6 @@ class User < ApplicationRecord
   has_one :cart
   has_many :groups, dependent: :destroy
   has_many :joiners, dependent: :destroy
+  has_many :members, dependent: :destroy
   
 end

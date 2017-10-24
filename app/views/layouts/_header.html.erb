@@ -1,9 +1,11 @@
 <div class="navbar navbar-inverse navbar-static-top">
   <div class="container">
 
-    <%= link_to 'Restaurant "Developers Life"', store_index_path, class: 'navbar-brand', color: "#ff0033" %>
     <% if user_admin %>
+      <%= link_to 'Restaurant "Developers Life"', product_types_path, class: 'navbar-brand', color: "#ff0033" %>
       <%= link_to 'admin panel mode', product_types_path, class: 'navbar-brand', id: 'navbar-admin' %>
+    <% else %>
+      <%= link_to 'Restaurant "Developers Life"', store_index_path, class: 'navbar-brand', color: "#ff0033" %>
     <% end %>
 
         <%# if user_login %>

@@ -84,4 +84,5 @@ class GroupsController < ApplicationController
       @joiners = Joiner.where(group_id: @group.id)
     end
 
+
 end
