@@ -8,5 +8,8 @@
   <%= @group.user %>
 </p>
 
-<%= link_to 'Редактировать', edit_group_path(@group) %> |
+<% if current_user.id == @group.user_id %>
+  <%= link_to 'Редактировать', edit_group_path(@group) %> |
+<% end %>
+
 <%= link_to 'Назад', root_path %>
