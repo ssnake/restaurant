@@ -39,23 +39,15 @@ class OrdersController < ApplicationController
     @order.set_order_attr(current_user)
     # подбиваем тотал стоимости, все данные из бд дергаем через id корзины
     @order.set_price(@cart)
-    @order.save
-    set_order_id_and_drop_cart_id
-    #@a = LineItem
-    #@order.add_line_items_from_cart(@cart)
-
-    respond_to do |format|
-    #  if @order.save
-    #    Cart.destroy(session[:cart_id])
-    #    session[:cart_id] = nil
-        format.html { redirect_to order_path(@order.id), notice: 'Спасибо за Ваш заказ!' }
-        format.json { render :show, status: :created, location: @order }
-    #  else
-    #    @cart = current_cart
-    #    format.html { render :new }
-    #    format.json { render json: @order.errors, status: :unprocessable_entity }
-    #  end
+    
+    if @order.save
+      set_order_id_and_drop_cart_id
+      Cart.destroy(@cart.id)
+      redirect_to order_path(@order.id), notice: 'Спасибо за Ваш заказ!' 
+    else 
+      redirect_to cart_path(id: @cart.id), alert: 'Заказ не отправлен, что то пошло не так!'
     end
+
   end
 
   # PATCH/PUT /orders/1
