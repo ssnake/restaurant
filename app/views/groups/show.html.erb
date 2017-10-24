@@ -1,0 +1,30 @@
+<p>
+  <strong>Название группы:</strong>
+  <%= @group.name %>
+</p>
+
+<p>
+  <strong>Создатель:</strong>
+  <%= @group.user.name %>
+</p>
+
+<% if current_user.id == @group.user_id %>
+  
+  <% if @joiners %>
+    Подали запрос на вступление в группу:<br/>
+    <%= render partial: 'groups/joiners_list', collection: @joiners, as: 'joiner' %>
+  <% end %>
+  
+  <hr/>
+
+  <%= link_to 'Редактировать', edit_group_path(@group) %> |
+<% end %>
+
+<% if current_user.id != @group.user_id %>
+  <%= button_to 'Хочу вступить в группу', 
+  		joiners_path(group_id: @group.id, user_id: current_user.id), 
+  		class: 'btn btn-warning btn-sm' %> |
+<% end %>
+
+
+<%= link_to 'Назад', root_path %>

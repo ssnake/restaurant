@@ -29,4 +29,10 @@ User.create!(name: '1', email: '1@gmail.com', password: '111111',
   password_confirmation: '111111')
 User.create!(name: '2', email: '2@gmail.com', password: '222222', 
   password_confirmation: '222222')
+User.create!(name: '3', email: '3@gmail.com', password: '333333', 
+  password_confirmation: '333333')
+User.create!(name: '4', email: '4@gmail.com', password: '444444', 
+  password_confirmation: '444444')
+User.create!(name: '5', email: '5@gmail.com', password: '555555', 
+  password_confirmation: '555555')
 

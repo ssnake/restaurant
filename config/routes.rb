@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  resources :members
+  resources :joiners
+  resources :groups
   resources :orders
   root to: 'store#index'
 
