@@ -1,24 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Это тестовое задание - приложение ресторана для заказа еды и напитков на Ruby-on-Rails.
+Для старта Вам необходимо выполнить миграции БД командой 
 
-Things you may want to cover:
+rake db:migrate
 
-* Ruby version
+далее заполнить БД данными по умолчанию
 
-* System dependencies
+rake db:seed
 
-* Configuration
+Для работы в режиме разработки или запуска приложения для просмотра на локальной машине запустите rails-сервер командой
 
-* Database creation
+rails server
 
-* Database initialization
+Приложение будет доступно по адресу http://localhost:3000/
 
-* How to run the test suite
+Для работы в редиме разработки и тестирования применяется БД SQLite3, в продакшен-режиме применяется БД PostgreSQL
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Теперь Вы можете заказать еду и напитки, а также просматривать заказы, управлять ими, взимать плату за заказанные блюда :)
