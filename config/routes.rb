@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   
+
   root to: 'store#index'
 
+  resources :group_store, only: [:index, :show]
   resources :members
   resources :joiners
   resources :groups
