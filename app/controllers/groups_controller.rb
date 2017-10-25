@@ -32,6 +32,8 @@ class GroupsController < ApplicationController
     @new_group = @user.groups.build(group_params)
     respond_to do |format|
       if @new_group.save
+        # создателя группы также записываем в члены группы
+        @user.members.create(group_id: @new_group.id, user_id: @user.id)
         format.html { redirect_to @new_group, notice: 'Группа создана! Вы можете ей управлять' }
         format.json { render :show, status: :created, location: @group }
       else

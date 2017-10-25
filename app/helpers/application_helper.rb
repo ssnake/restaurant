@@ -30,5 +30,9 @@ module ApplicationHelper
     Joiner.where(user_id: current_user.id, group_id: @group.id).exists?
   end
 
+  def current_user_already_in_this_group
+    Member.where(user_id: current_user.id, group_id: @group.id).exists?
+  end
+
 
 end

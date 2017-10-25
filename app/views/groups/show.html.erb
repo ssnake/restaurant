@@ -27,8 +27,12 @@
   <%= link_to 'Редактировать', edit_group_path(@group) %> |
 <% end %>
 
+<!-- проверка что текущий юзер уже подал заявку в эту группу, метод см. в хелпере -->
 <% if current_user_already_send_join_to_group  %>
   <button type="button" class="btn btn-warning btn-sm disabled">Заявка уже отправлена</button>
+<!-- если вы уже состоите в группе, метод см. в хелпере -->
+<% elsif current_user_already_in_this_group %>
+  <p>Вы состоите в этой группе</p>
 <% elsif current_user.id != @group.user_id %>
   <%= button_to 'Хочу вступить в группу', 
   		joiners_path(group_id: @group.id, user_id: current_user.id), 
