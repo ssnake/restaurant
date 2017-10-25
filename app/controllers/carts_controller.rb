@@ -56,7 +56,7 @@ class CartsController < ApplicationController
   # DELETE /carts/1
   # DELETE /carts/1.json
   def destroy
-    # удалить корзину если ее id совпадает с id корзины в сессии
+    # удалить корзину если ее id совпадает с id юзера
     # чтобы не удалиласть корзина другого пользователя
     @cart.destroy if @cart.user_id == current_user.id
     session[:cart_id] = nil
