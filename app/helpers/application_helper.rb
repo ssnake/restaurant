@@ -34,5 +34,8 @@ module ApplicationHelper
     Member.where(user_id: current_user.id, group_id: @group.id).exists?
   end
 
+  # устанавливаем текущую группу
+  #def 
+
 
 end

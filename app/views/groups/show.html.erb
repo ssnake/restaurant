@@ -24,7 +24,7 @@
   
   <hr/>
 
-  <%= link_to 'Меню общего заказа', group_store_index_path %> |
+  <%= link_to 'Меню общего заказа', group_store_index_path(group_id: @group.id) %> |
   <%= link_to 'Редактировать', edit_group_path(@group) %> |
 <% end %>
 

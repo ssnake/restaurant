@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root to: 'store#index'
 
-  resources :group_store, only: [:index, :show]
+  #resources :group_store, only: [:index, :show]
   resources :members
   resources :joiners
   resources :groups
@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   resources :store, only: [:index, :show]
   resources :line_items
   resources :carts
+
+  scope '/group/:group_id' do
+    resources :group_store, only: [:index, :show]
+  end
 
   devise_for :users
   # общая точка входа
