@@ -1,4 +1,5 @@
 class GroupStoreController < ApplicationController
+	before_action :current_group
   
   def index
   	@product_types = ProductType.all
@@ -9,6 +10,12 @@ class GroupStoreController < ApplicationController
     @product_type = ProductType.find(params[:id])
     @product_types = ProductType.all
     @products_by_product_type = @product_type.products.order('title ASC')
+  end
+
+  private
+
+  def current_group
+  	@group = Group.find(params[:group_id])
   end
 
 end
