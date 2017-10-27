@@ -1,2 +1,31 @@
-<h1>GroupStore#index</h1>
-<p>Find me in app/views/group_store/index.html.erb</p>
+<h1>Наше меню для группового заказа</h1> - для юзеров
+
+<br/>
+
+<% @group = Group.(session[:group_id]) %>
+Текущая группа: <%#= @group.name %><br/>
+
+<hr/>
+
+<%= link_to 'Все меню |', group_store_index_path %>
+
+<%= render partial: 'group_store/group_store_product_type', collection: @product_types, as: 'product_type' %>
+
+<hr/>
+
+<div id="products_table">
+  <table class="table table-border table-hover">
+    <thead>
+      <tr>
+        <th>Блюдо</th>
+        <th>Описание</th>
+        <th>Стоимость, грн</th>
+        <th></th>
+      </tr>
+    </thead>
+      
+    <!-- рендерим через партиал полный список всех типов блюд -->
+    <%= render partial: 'group_store/group_product_table', collection: @products_all, as: 'product_table' %>
+       
+  </table>
+</div>
