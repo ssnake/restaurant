@@ -1,7 +1,6 @@
 class GroupOrder < ApplicationRecord
   
   has_many :group_line_items, dependent: :destroy
-  has_one :group
   # определяем массив видов оплаты
   PAYMENT_TYPES = ["наличными", "кредитной картой"]
 
@@ -25,5 +24,11 @@ class GroupOrder < ApplicationRecord
   	end
   	self.price = total
   end
+
+
+  # получить участников группы через соединит. таблицу GroupLineItem
+  #def get_members
+    #
+  #end
 
 end

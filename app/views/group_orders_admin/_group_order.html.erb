@@ -1,12 +1,9 @@
-      <tr>
-        <th>ID заказа</th>
-        <th>Заказчики</th>
-        <th>Комментарии к заказу</th>
-        <th>Стоимость, грн</th>
-        <th></th>
-      </tr>
-
 <tr>
   <th><%= group_order.id %></th>
-  <th><%#= group_order.group %></th>
+  <th><%= group_order.notice %></th>
+  <th><%= group_order.price %></th>
+  <th>
+  	<%= link_to 'по пользователям', group_orders_admin_path(group_order) %> |
+по блюдам
+  </th>
 </tr>

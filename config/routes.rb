@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   
 
+  get 'group_orders_admin/dish'
+
   # просмотр админом оформленных заказов
-  resources :single_orders, only: [:index, :show, :destroy]
+  resources :single_orders, only: [:index, :show, :dish, :destroy]
   resources :group_orders_admin, only: [:index, :show, :destroy]
+  #get '/group_orders_admin/:id' to: 'group_orders_admin#show'
+
 
   root to: 'store#index'
 
