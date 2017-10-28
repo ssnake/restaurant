@@ -7,7 +7,7 @@
   <!-- кнопки для заказа доступны, если юзер выполнил вход и не является админом -->
   <% if user_login %>
     <th>
-      <%= button_to '######В корзину', group_line_items_path(group_cart_id: @group.group_cart.id, product_id: product_table.id) %>
+      <%= button_to 'В корзину', group_line_items_path(group_cart_id: @group.group_cart.id, product_id: product_table.id) %>
     </th>
   <% end %>
   

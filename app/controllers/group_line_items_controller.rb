@@ -33,7 +33,7 @@ class GroupLineItemsController < ApplicationController
     
     respond_to do |format|
       if @group_line_item.save
-        format.html { redirect_to group_line_item_path(group_id: @group.id, id: @group_line_item.id), 
+        format.html { redirect_to group_cart_path(id: @group_cart.id), 
           notice: 'Блюдо добавлено в предзаказ (корзину)' }
         format.json { render :show, status: :created, location: @group_line_item }
       else

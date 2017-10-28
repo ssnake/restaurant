@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   root to: 'store#index'
 
-  #resources :group_store, only: [:index, :show]
   resources :members
   resources :joiners
   resources :groups
@@ -15,6 +14,7 @@ Rails.application.routes.draw do
   scope '/group/:group_id' do
     resources :group_store, only: [:index, :show]
     resources :group_line_items
+    resources :group_carts
   end
 
   devise_for :users
