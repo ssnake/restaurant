@@ -1,0 +1,2 @@
+module GroupOrdersAdminHelper
+end

@@ -1,0 +1,20 @@
+<h1>Просмотр всех групповых заказов</h1>
+
+<div id="single-orders_table">
+  <table class="table table-border table-hover">
+    <thead>
+      <tr>
+        <th>ID заказа</th>
+        <th>Заказчики</th>
+        <th>Комментарии к заказу</th>
+        <th>Стоимость, грн</th>
+        <th></th>
+      </tr>
+    </thead>
+
+  <!-- рендерим через партиал заказы -->
+  <% if @group_orders %>
+    <%= render partial: 'group_orders_admin/group_order', collection: @group_orders, as: 'group_order' %>
+  <% end %>
+  </table>
+</div>

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   
 
+  # просмотр админом оформленных заказов
   resources :single_orders, only: [:index, :show, :destroy]
+  resources :group_orders_admin, only: [:index, :show, :destroy]
 
   root to: 'store#index'
 
