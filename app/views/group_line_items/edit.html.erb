@@ -1,6 +1,5 @@
-<h1>Editing Group Line Item</h1>
+<h1>Укажите количество</h1>
 
-<%= render 'form', group_line_item: @group_line_item %>
+<%= render 'group_line_items/form_group_line_item_quantity', group_line_item: @group_line_item %>
 
-<%= link_to 'Show', @group_line_item %> |
-<%= link_to 'Back', group_line_items_path %>
+<%= link_to 'Back', :back %>

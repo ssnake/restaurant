@@ -1,5 +1,9 @@
 class GroupCartsController < ApplicationController
+  include CurrentCart
+  before_action :set_current_group
   before_action :set_group_cart
+
+  #before_action :set_group_cart
 
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
@@ -26,9 +30,9 @@ class GroupCartsController < ApplicationController
 
   private
 
-  def set_group_cart
-    @group_cart = GroupCart.find(params[:id])
-  end
+  #def set_group_cart
+  #  @group_cart = GroupCart.find(params[:id])
+  #end
 
   # выдаем исключение при неправильно указанной корзине с блюдами
   def invalid_cart
