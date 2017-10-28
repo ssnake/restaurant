@@ -4,8 +4,8 @@
 <table class="table table-bordered">
   <%= render(group_cart.group_line_items) %>
   <tr class="total_line">
-  	<td colspan="2"><b>Итого</b></td>
-  	<td class="total_cell"><b><%#= my_number_to_currency(@cart.total_price) %> грн</b></td>
+  	<td colspan="3"><b>Итого</b></td>
+  	<td class="total_cell"><b><%= my_number_to_currency(@group_cart.total_price) %> грн</b></td>
   </tr>
 
 </table>
@@ -13,7 +13,7 @@
 
 <%= link_to 'Назад', :back %> | 
 <br/><br/>
-<%#= button_to 'Очистить корзину заказа', cart_path(@cart), method: :delete,
+<%= button_to 'Очистить корзину заказа', group_cart_path(@group_cart), method: :delete,
 	data: {confirm: 'Вы уверены что хотите очистить корзину заказа?'}, 
 	class: 'btn btn-danger btn-sm' %> |
 <%#= button_to 'Оформить заказ', new_order_path, method: :get,

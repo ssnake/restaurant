@@ -14,4 +14,10 @@ class GroupCart < ApplicationRecord
   	end
   	current_item
   end
+
+  # подсчет суммы стоимости всех позиций
+  def total_price
+    group_line_items.to_a.sum { |item| item.total_price }
+  end
+  
 end

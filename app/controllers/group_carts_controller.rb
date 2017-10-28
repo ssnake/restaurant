@@ -26,13 +26,17 @@ class GroupCartsController < ApplicationController
   end
 
   def destroy
+    if @group_cart.group.user.id == current_user.id
+      @group_cart.destroy
+      session[:group_cart_id] = nil
+      redirect_to group_path(id: @group.id), notice: 'Групповая корзина очищена'
+    else
+      render :show, alert: 'У вас нет прав на очистку корзины т. к. Вы не являетесь создателем группы'
+    end
   end
 
   private
 
-  #def set_group_cart
-  #  @group_cart = GroupCart.find(params[:id])
-  #end
 
   # выдаем исключение при неправильно указанной корзине с блюдами
   def invalid_cart
