@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Product:</strong>
+  <%= @group_line_item.product %>
+</p>
+
+<p>
+  <strong>Group cart:</strong>
+  <%= @group_line_item.group_cart %>
+</p>
+
+<%= link_to 'Edit', edit_group_line_item_path(@group_line_item) %> |
+<%= link_to 'Back', group_line_items_path %>

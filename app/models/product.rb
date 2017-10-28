@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   belongs_to :product_type
   # имеет много записей связывающей таблицы
   has_many :line_items
+  has_many :group_line_items
 
   # определяем методы валидации продукта
   validates :title, presence: { message: 'Название не может быть пустым' }
@@ -14,6 +15,7 @@ class Product < ApplicationRecord
 
   # перед удалением проверяем отсутствие товара в соед. таблице
   before_destroy :ensure_not_references_by_any_line_item
+  before_destroy :ensure_not_references_by_any_group_line_item
 
   private
 
@@ -26,6 +28,17 @@ class Product < ApplicationRecord
   	  errors.add(:base, 'существуют такие позиции блюд')
   	  return false
   	end
+  end
+
+  # убеждаемся в отсутствии позиций данного блюда в соединительной таблице групповых заказов
+  # чтобы не удалить блюдо из меню, в то время когда его заказали
+  def ensure_not_references_by_any_group_line_item
+    if group_line_items.empty?
+      return true
+    else
+      errors.add(:base, 'существуют такие позиции блюд')
+      return false
+    end
   end
 
 end

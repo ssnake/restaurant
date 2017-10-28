@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
 
+  resources :group_line_items
   root to: 'store#index'
 
   #resources :group_store, only: [:index, :show]
