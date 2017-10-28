@@ -1,0 +1,13 @@
+<tr>
+  <td><%= group_line_item.product.title %></td>
+  <td><%= group_line_item.product.description %></td>
+  <td><%= group_line_item.quantity %> шт</td>
+  <td class="item_price">
+  	<%#= my_number_to_currency(line_item.total_price) %> |
+    <%#= link_to fa_icon('pencil-square-o') + 'ред', edit_line_item_path(line_item) %> |
+    <%#= link_to fa_icon('window-close-o') + 'удал', line_item_path(id: line_item.id),
+    	method: :delete, data: {confirm: 'удалить товар из заказа?'}, 
+    	style: "color: red" %>
+  </td>
+  
+</tr>

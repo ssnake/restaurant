@@ -29,7 +29,8 @@ class GroupLineItemsController < ApplicationController
   # POST /group_line_items.json
   def create
     product = Product.find(params[:product_id])
-    @group_line_item = @group_cart.group_line_items.build(product: product)
+    @group_line_item = @group_cart.add_product(product.id)
+    #@group_line_item = @group_cart.group_line_items.build(product: product)
     
     respond_to do |format|
       if @group_line_item.save
