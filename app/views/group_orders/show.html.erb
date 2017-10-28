@@ -20,5 +20,11 @@
   <%= @group_order.pay_type %>
 </p>
 
-<%= link_to 'Edit', edit_group_order_path(@group_order) %> |
-<%= link_to 'Back', group_orders_path %>
+Заказано:
+<br/>
+<%= render partial: 'group_orders/group_order', collection: @my_group_order, 
+		as: 'group_order' %>
+-------------<br/>
+Итого: <%= my_number_to_currency(@group_order.price) %><br/>
+
+<%= link_to 'На главную', root_path %>

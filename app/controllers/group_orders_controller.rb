@@ -1,4 +1,8 @@
 class GroupOrdersController < ApplicationController
+  # устанавливаем корзину
+  include CurrentCart
+  before_action :set_current_group #, except: [:destroy]
+  before_action :set_group_cart #, except: [:destroy]
   before_action :set_group_order, only: [:show, :edit, :update, :destroy]
 
   # GET /group_orders
@@ -10,10 +14,15 @@ class GroupOrdersController < ApplicationController
   # GET /group_orders/1
   # GET /group_orders/1.json
   def show
+    @my_group_order = GroupLineItem.where(group_order_id: @group_order.id)
   end
 
   # GET /group_orders/new
   def new
+    if @group_cart.group_line_items.empty?
+      redirect_to group_store_index(params[:group_id]), alert: 'Нельзя создавать пустой зкакз, купите же что нибудь!'
+      return
+    end
     @group_order = GroupOrder.new
   end
 
@@ -25,16 +34,16 @@ class GroupOrdersController < ApplicationController
   # POST /group_orders.json
   def create
     @group_order = GroupOrder.new(group_order_params)
-
-    respond_to do |format|
-      if @group_order.save
-        format.html { redirect_to @group_order, notice: 'Group order was successfully created.' }
-        format.json { render :show, status: :created, location: @group_order }
-      else
-        format.html { render :new }
-        format.json { render json: @group_order.errors, status: :unprocessable_entity }
-      end
+    @group_order.set_order_attr(@group.user)
+    @group_order.set_price(@group_cart)
+    if @group_order.save
+      set_group_order_id_and_drop_group_cart_id
+      GroupCart.destroy(@group_cart.id)
+      redirect_to group_order_path(id: @group_order.id), notice: 'Спасибо за Ваш заказ!'
+    else
+      render 'new', alert: 'Заказ не создан, что то пошло не так!'
     end
+
   end
 
   # PATCH/PUT /group_orders/1
@@ -69,6 +78,11 @@ class GroupOrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_order_params
-      params.require(:group_order).permit(:name, :email, :notice, :pay_type)
+      params.require(:group_order).permit(:notice, :pay_type)
+    end
+
+    def set_group_order_id_and_drop_group_cart_id
+      item = GroupLineItem.where(group_cart_id: @group_cart.id)
+      item.update_all(group_order_id: @group_order.id, group_cart_id: nil)
     end
 end
