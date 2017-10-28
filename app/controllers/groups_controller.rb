@@ -3,6 +3,9 @@ class GroupsController < ApplicationController
   before_action :set_user, only: [:new, :create]
   before_action :set_joiners, only: [:show]
 
+  include CurrentCart
+  before_action :set_group_cart, only: [:show]
+
 
   # GET /groups
   # GET /groups.json

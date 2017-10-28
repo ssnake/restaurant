@@ -24,7 +24,7 @@ module CurrentCart
   def set_group_cart
     if user_signed_in? == true
       if @group.group_cart != nil
-        @group_cart = GroupCart.find(@group.id)
+        @group_cart = GroupCart.find(@group.group_cart.id)
       else 
         @group_cart = GroupCart.new
         @group_cart.group_id = @group.id

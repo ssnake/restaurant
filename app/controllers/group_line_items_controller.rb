@@ -43,17 +43,19 @@ class GroupLineItemsController < ApplicationController
 
 
   def destroy
+    group_line_item_for_destroy
     @group_line_item.destroy
-    respond_to do |format|
-      format.html { redirect_to @group_line_item.group_cart, notice: 'Блюдо удалено из заказа' }
-      format.json { head :no_content }
-    end
+    redirect_to group_cart_path(id: @group_cart.id), notice: 'Блюдо удалено из заказа'
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group_line_item
       @group_line_item = GroupLineItem.find(params[:id])
+    end
+
+    def group_line_item_for_destroy
+      @group_line_item = GroupLineItem.find_by(id: params[:group_line_item_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
