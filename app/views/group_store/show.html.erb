@@ -2,7 +2,9 @@
 
 <br/>
 
-Текущая группа: <%= @group.name %><br/>
+Текущая группа: <%= @group.name %> | 
+<%= link_to 'Заказ группы', group_cart_path(group_id: @group.id, id: @group_cart.id)  %>
+<br/>
 
 <hr/>
 

@@ -22,6 +22,14 @@
             <%= link_to 'Мой заказ', cart_path(id: @cart.id) if @cart %>
           </li>
         <% end %>
+
+        <% if @group_cart %>
+          <li id="cart-button">
+            <%= link_to 'Заказ группы' + @group_cart.group.name, 
+            group_cart_path(group_id: @group.id, id: @group_cart.id)  %>
+          </li>
+        <% end %>
+
         <% if user_signed_in? %>
           <li id="header_name">Здравствуйте, <%= current_user.name %>  | </li>
           <%= link_to 'Выйти', destroy_user_session_path, :method => :delete, class: "btn btn-primary btn-sm active" %>
