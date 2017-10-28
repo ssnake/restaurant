@@ -10,9 +10,10 @@ class GroupOrder < ApplicationRecord
   validates :notice, 
   			length: { maximum: 255, message: 'Комментари к заказу не должны быть длиннее 255 символов' }
 
-  def set_order_attr(user)
-  	self.name = user.name
-  	self.email = user.email
+  def set_order_attr(group)
+  	self.name = group.user.name
+  	self.email = group.user.email
+    self.group_name = group.name
   end
 
   def set_price(group_cart)

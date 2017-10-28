@@ -1,22 +1,27 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Название группы:</strong>
+  <%= @group_order.group_name %>
+</p>
+
+<p>
+  <strong>Главный заказчик:</strong>
   <%= @group_order.name %>
 </p>
 
 <p>
-  <strong>Email:</strong>
+  <strong>Почта:</strong>
   <%= @group_order.email %>
 </p>
 
 <p>
-  <strong>Notice:</strong>
+  <strong>Комментарии:</strong>
   <%= @group_order.notice %>
 </p>
 
 <p>
-  <strong>Pay type:</strong>
+  <strong>Тип оплаты:</strong>
   <%= @group_order.pay_type %>
 </p>
 

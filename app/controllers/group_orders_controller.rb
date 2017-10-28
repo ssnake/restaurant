@@ -34,7 +34,7 @@ class GroupOrdersController < ApplicationController
   # POST /group_orders.json
   def create
     @group_order = GroupOrder.new(group_order_params)
-    @group_order.set_order_attr(@group.user)
+    @group_order.set_order_attr(@group)
     @group_order.set_price(@group_cart)
     if @group_order.save
       set_group_order_id_and_drop_group_cart_id
