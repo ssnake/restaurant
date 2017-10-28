@@ -1,11 +1,11 @@
 class GroupCartsController < ApplicationController
   include CurrentCart
-  before_action :set_current_group
-  before_action :set_group_cart
+  before_action :set_current_group #, except: [:destroy]
+  before_action :set_group_cart #, except: [:destroy]
 
   #before_action :set_group_cart
 
-  rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
+  #rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   def index
   end
@@ -26,13 +26,8 @@ class GroupCartsController < ApplicationController
   end
 
   def destroy
-    if @group_cart.group.user.id == current_user.id
-      @group_cart.destroy
-      session[:group_cart_id] = nil
-      redirect_to group_path(id: @group.id), notice: 'Групповая корзина очищена'
-    else
-      render :show, alert: 'У вас нет прав на очистку корзины т. к. Вы не являетесь создателем группы'
-    end
+    @group_cart.group_line_items.destroy_all
+    redirect_to group_path(id: @group_cart.group_id), notice: 'Групповая корзина очищена'
   end
 
   private
