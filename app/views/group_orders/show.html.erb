@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @group_order.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @group_order.email %>
+</p>
+
+<p>
+  <strong>Notice:</strong>
+  <%= @group_order.notice %>
+</p>
+
+<p>
+  <strong>Pay type:</strong>
+  <%= @group_order.pay_type %>
+</p>
+
+<%= link_to 'Edit', edit_group_order_path(@group_order) %> |
+<%= link_to 'Back', group_orders_path %>

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :group_store, only: [:index, :show]
     resources :group_line_items
     resources :group_carts
+    resources :group_orders
   end
 
   devise_for :users

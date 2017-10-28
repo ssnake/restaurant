@@ -1,0 +1,2 @@
+class GroupOrder < ApplicationRecord
+end

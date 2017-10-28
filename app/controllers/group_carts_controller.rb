@@ -3,9 +3,7 @@ class GroupCartsController < ApplicationController
   before_action :set_current_group #, except: [:destroy]
   before_action :set_group_cart #, except: [:destroy]
 
-  #before_action :set_group_cart
-
-  #rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   def index
   end

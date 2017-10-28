@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Group Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Notice</th>
+      <th>Pay type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @group_orders.each do |group_order| %>
+      <tr>
+        <td><%= group_order.name %></td>
+        <td><%= group_order.email %></td>
+        <td><%= group_order.notice %></td>
+        <td><%= group_order.pay_type %></td>
+        <td><%= link_to 'Show', group_order %></td>
+        <td><%= link_to 'Edit', edit_group_order_path(group_order) %></td>
+        <td><%= link_to 'Destroy', group_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Group Order', new_group_order_path %>
