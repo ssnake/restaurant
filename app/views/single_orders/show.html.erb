@@ -1,0 +1,31 @@
+<h1>Детализация заказа</h1>
+
+<div id="single-orders_table">
+  <table class="table table-border table-hover">
+    <thead>
+      <tr>
+        <th>О заказе</th>
+        <th>Комментарии к заказу</th>
+        <th>Детализация заказанного</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tr>
+      <td>
+      	ID заказа: <%= @single_order.id %><br/>
+        Заказчик: <%= @single_order.name %>
+    </td>
+    <td><%= @single_order.notice %></td>
+    <td>
+      <%= render partial: 'single_orders/line_item', collection: @line_items, as: 'line_item' %>
+    </td>
+    <tr class="total_line">
+  	  <td colspan="2"><b>Итого</b></td>
+  	  <td class="total_cell">
+  	  	<b><%= my_number_to_currency(@single_order.price) %> грн</b>
+  	  </td>
+    </tr>
+  </table>
+  <%= link_to 'Назад', :back %>
+</div>

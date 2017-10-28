@@ -15,18 +15,17 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-
-          <!-- меню администратора -->
-          <% if user_admin %>
-            <%= render 'layouts/admin_menu' %>
-          <% end %>
-          
           <!-- вывод уведомлений и ошибок -->
           <% if notice != nil %>
             <p class="alert alert-success"><%= notice %></p>
           <% end %>
           <% if alert != nil %>
             <p class="alert alert-error alert-danger"><%= alert %></p>
+          <% end %>
+
+          <!-- меню администратора -->
+          <% if user_admin %>
+            <%= render 'layouts/admin_menu' %>
           <% end %>
                  
           <%= yield %>
@@ -36,15 +35,13 @@
 
     <hr/>
     <%= debug(params) if Rails.env.development? %> 
-    <hr/>
-
     <!-- моя зона отладки -->
-    <% if Rails.env.development? %> 
-      <%= @group.inspect %><br/>
-      <%= @group_cart.inspect %><br/>
-      <%= @group_order.inspect %><br/>
-      <%= @my_group_order.inspect %><br/>
-    <% end %>
+    <%# if Rails.env.development? %> 
+      <%#= @group.inspect %><br/>
+      <%#= @group_cart.inspect %><br/>
+      <%#= @group_order.inspect %><br/>
+      <%#= @my_group_order.inspect %><br/>
+    <%# end %>
   </div>
   
   </body>

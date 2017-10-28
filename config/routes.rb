@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
 
+  resources :single_orders, only: [:index, :show, :destroy]
+
   root to: 'store#index'
 
   resources :members

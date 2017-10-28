@@ -1,0 +1,20 @@
+<h1>Просмотр всех одиночных заказов</h1>
+
+<div id="single-orders_table">
+  <table class="table table-border table-hover">
+    <thead>
+      <tr>
+        <th>ID заказа</th>
+        <th>Заказчик</th>
+        <th>Комментарии к заказу</th>
+        <th>Стоимость, грн</th>
+        <th></th>
+      </tr>
+    </thead>
+
+  <!-- рендерим через партиал заказы -->
+  <% if @single_orders %>
+    <%= render partial: 'single_orders/order', collection: @single_orders, as: 'order' %>
+  <% end %>
+  </table>
+</div>
