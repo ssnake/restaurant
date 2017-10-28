@@ -6,19 +6,31 @@ module CurrentCart
 
   private
 
-  # устанавливаем текущую корзину 
+  # устанавливаем текущую корзину юзера
   def set_cart
-
-      if user_signed_in? == true
-        if current_user.cart != nil
-          @cart = current_user.cart
-        else
-          @cart = Cart.new
-          @cart.user_id = current_user.id
-          @cart.save
-        end
+    if user_signed_in? == true
+      if current_user.cart != nil
+        @cart = current_user.cart
+      else
+        @cart = Cart.new
+        @cart.user_id = current_user.id
+        @cart.save
       end
- 
+    end
   end
 
+
+  # устанавливаем метод обнаружения групповой корзины
+  def set_group_cart
+    if user_signed_in? == true
+      if @group.group_cart != nil
+        @group_cart = GroupCart.find(@group.id)
+      else 
+        @group_cart = GroupCart.new
+        @group_cart.group_id = @group.id
+        @group_cart.save
+      end
+    end
+  end
+ 
 end

@@ -1,6 +1,10 @@
 class GroupStoreController < ApplicationController
 	before_action :current_group
-  
+
+	include CurrentCart
+    before_action :set_group_cart
+	
+ 
   def index
   	@product_types = ProductType.all
   	@products_all = Product.order(:title)

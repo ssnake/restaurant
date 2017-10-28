@@ -21,11 +21,11 @@
     Подали запрос на вступление в группу:<br/>
     <%= render partial: 'groups/joiners_list', collection: @joiners, as: 'joiner' %>
   <% end %>
+  <br/>
+
+  <%= link_to 'Редактировать', edit_group_path(@group) %> |
   
   <hr/>
-
-  <%= link_to 'Меню общего заказа', group_store_index_path(group_id: @group.id) %> |
-  <%= link_to 'Редактировать', edit_group_path(@group) %> |
 <% end %>
 
 <!-- проверка что текущий юзер уже подал заявку в эту группу, метод см. в хелпере -->
@@ -40,7 +40,7 @@
   		class: 'btn btn-warning btn-sm' %> |
 <% end %>
 
-
+<%= link_to 'Меню общего заказа', group_store_index_path(group_id: @group.id) %> |
 
 
 <%= link_to 'Назад', root_path %>

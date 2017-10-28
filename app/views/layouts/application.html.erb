@@ -41,6 +41,7 @@
     <!-- моя зона отладки -->
     <% if Rails.env.development? %> 
       <%= @group.inspect %><br/>
+      <%= @group_cart.inspect %><br/>
       <%= current_user.inspect %><br/>
     <% end %>
   </div>
