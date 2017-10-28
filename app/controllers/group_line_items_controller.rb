@@ -26,7 +26,8 @@ class GroupLineItemsController < ApplicationController
 
   def create
     product = Product.find(params[:product_id])
-    @group_line_item = @group_cart.add_product(product.id)
+    @group_line_item = @group_cart.add_product(product.id, current_user.id)
+    @group_line_item.user_id = current_user.id
     
     @group_line_item.save
     redirect_to group_cart_path(id: @group_cart.id), notice: 'Блюдо добавлено в предзаказ (корзину)'

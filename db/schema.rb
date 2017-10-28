@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171028153703) do
+ActiveRecord::Schema.define(version: 20171028193809) do
 
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -33,9 +33,11 @@ ActiveRecord::Schema.define(version: 20171028153703) do
     t.datetime "updated_at", null: false
     t.integer "quantity", default: 1
     t.integer "group_order_id"
+    t.integer "user_id"
     t.index ["group_cart_id"], name: "index_group_line_items_on_group_cart_id"
     t.index ["group_order_id"], name: "index_group_line_items_on_group_order_id"
     t.index ["product_id"], name: "index_group_line_items_on_product_id"
+    t.index ["user_id"], name: "index_group_line_items_on_user_id"
   end
 
   create_table "group_orders", force: :cascade do |t|

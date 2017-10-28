@@ -1,7 +1,10 @@
 <tr>
   <td><%= group_line_item.product.title %></td>
   <td><%= group_line_item.product.description %></td>
+  <td>заказал клиент <%= group_line_item.user.name %></td>
   <td><%= group_line_item.quantity %> шт</td>
+  <td><%= group_line_item.total_price %> шт</td>
+
   <td class="item_price">
   	<%= my_number_to_currency(group_line_item.total_price) %> |
     <%= link_to fa_icon('pencil-square-o') + 'ред', edit_group_line_item_path(id: group_line_item.id) %> |

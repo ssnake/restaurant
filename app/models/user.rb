@@ -10,5 +10,6 @@ class User < ApplicationRecord
   has_many :groups, dependent: :destroy
   has_many :joiners, dependent: :destroy
   has_many :members, dependent: :destroy
+  has_many :group_line_items, dependent: :destroy
   
 end
