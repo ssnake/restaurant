@@ -1,7 +1,7 @@
 class GroupLineItemsController < ApplicationController
   include CurrentCart
-  before_action :set_current_group
-  before_action :set_group_cart
+  before_action :set_current_group, except: [:update] # exceptions solved problems with update
+  before_action :set_group_cart, except: [:update] # exceptions solved problems with update
 
   before_action :set_group_line_item, only: [:show, :edit, :update, :destroy]
 
@@ -35,9 +35,10 @@ class GroupLineItemsController < ApplicationController
 
 
   def update
-    @group_line_item.quantity = group_line_item_quantity_params
-    @group_line_item.update
-    redirect_to @group_line_item.group_cart, notice: 'Количество обновлено' 
+    @group_line_item.update(group_line_item_quantity_params)
+    
+    redirect_to group_cart_path(group_id: @group_line_item.group_cart.group_id, 
+      id: @group_line_item.id), notice: 'Количество обновлено' 
   end
 
 
