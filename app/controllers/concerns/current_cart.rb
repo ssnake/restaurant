@@ -32,5 +32,10 @@ module CurrentCart
       end
     end
   end
+
+  def set_current_group
+    @group = Group.find(params[:group_id])
+  end
+
  
 end

@@ -1,4 +1,8 @@
 class GroupLineItemsController < ApplicationController
+  include CurrentCart
+  before_action :set_current_group
+  before_action :set_group_cart
+
   before_action :set_group_line_item, only: [:show, :edit, :update, :destroy]
 
   # GET /group_line_items
@@ -24,11 +28,13 @@ class GroupLineItemsController < ApplicationController
   # POST /group_line_items
   # POST /group_line_items.json
   def create
-    @group_line_item = GroupLineItem.new(group_line_item_params)
-
+    product = Product.find(params[:product_id])
+    @group_line_item = @group_cart.group_line_items.build(product: product)
+    
     respond_to do |format|
       if @group_line_item.save
-        format.html { redirect_to @group_line_item, notice: 'Group line item was successfully created.' }
+        format.html { redirect_to group_line_item_path(group_id: @group.id, id: @group_line_item.id), 
+          notice: 'Блюдо добавлено в предзаказ (корзину)' }
         format.json { render :show, status: :created, location: @group_line_item }
       else
         format.html { render :new }

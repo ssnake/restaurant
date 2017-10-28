@@ -1,8 +1,8 @@
 class GroupStoreController < ApplicationController
-	before_action :current_group
 
 	include CurrentCart
-    before_action :set_group_cart
+  before_action :set_current_group
+  before_action :set_group_cart
 	
  
   def index
@@ -16,10 +16,5 @@ class GroupStoreController < ApplicationController
     @products_by_product_type = @product_type.products.order('title ASC')
   end
 
-  private
-
-  def current_group
-  	@group = Group.find(params[:group_id])
-  end
 
 end
