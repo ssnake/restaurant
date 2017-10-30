@@ -1,4 +1,4 @@
-<h2>Детализация группового заказа по заказчикам</h2>
+<h2>Детализация группового</h2>
 
 ID заказа: <%= @group_order.id %><br/>
 Группа заказа: <%= @group_order.group_name %><br/>
@@ -9,16 +9,8 @@ ID заказа: <%= @group_order.id %><br/>
 <%= link_to 'Назад', group_orders_admin_index_path %><br/>
 ----------------------------------<br/>
 
-<h4>Детализация по заказчикам</h4>
-
-<div id="group-orders-table">
-  <table class="table table-border table-hover table-striped">
-
-    <%= render partial: 'group_orders_admin/order_by_users', collection: @pull_users, as: 'user' %>
-  <tr>
-    <th colspan="3"><h4>Итого</h4></th>
-    <th><h4><%= my_number_to_currency(@group_order.price) %></h4></th>
-  </tr>
-
-  </table>
-</div>
+<% if params[:how_to_view] == 'by_user' %>
+  <%= render 'group_orders_admin/show_by_users' %>
+<% elsif params[:how_to_view] == 'by_dish' %>
+  <%= render 'group_orders_admin/show_by_dish' %>
+<% end %>
