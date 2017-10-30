@@ -1,3 +1,19 @@
-<h1>Детализация группового заказа по заказчикам</h1>
+<h2>Детализация группового заказа по заказчикам</h2>
 
-<%= @pull_users.inspect %>
+ID заказа: <%= @group_order.id %><br/>
+Группа заказа: <%= @group_order.group_name %><br/>
+Создатель группы заказа: <%= @group_order.name %> | <%= @group_order.email %><br/>
+Примечание к заказу: <%= @group_order.notice %><br/>
+Тип оплаты: <%= @group_order.pay_type %><br/>
+Когда заказ создан: <%= @group_order.created_at %><br/>
+----------------------------------<br/>
+
+<h4>Детализация по заказчикам</h4>
+
+<div id="group-orders-table">
+  <table class="table table-border table-hover table-striped">
+
+    <%= render partial: 'group_orders_admin/order_by_users', collection: @pull_users, as: 'user' %>
+
+  </table>
+</div>

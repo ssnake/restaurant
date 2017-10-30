@@ -5,8 +5,7 @@ class GroupOrdersAdminController < ApplicationController
 
   def show
   	@group_order = GroupOrder.find(params[:id])
-  	@group_line_items = @group_order.group_line_items
-    set_pull_users
+  	@pull_users = set_pull_users(@group_order.group_line_items)
   end
 
   def dish
@@ -17,11 +16,11 @@ class GroupOrdersAdminController < ApplicationController
 
   private
 
-  def set_pull_users
-  	@pull_users = []
-  	@group_line_items.each do |item|
-  	  @pull_users << item.user
+  def set_pull_users(group_line_items)
+  	pull_users = []
+  	group_line_items.each do |item|
+  	  pull_users << item.user
   	end
-  	@pull_users.uniq
+    pull_users.uniq
   end
 end
