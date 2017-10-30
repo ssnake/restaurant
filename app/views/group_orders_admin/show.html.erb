@@ -6,6 +6,7 @@ ID заказа: <%= @group_order.id %><br/>
 Примечание к заказу: <%= @group_order.notice %><br/>
 Тип оплаты: <%= @group_order.pay_type %><br/>
 Когда заказ создан: <%= @group_order.created_at %><br/>
+<%= link_to 'Назад', group_orders_admin_index_path %><br/>
 ----------------------------------<br/>
 
 <h4>Детализация по заказчикам</h4>
@@ -14,6 +15,10 @@ ID заказа: <%= @group_order.id %><br/>
   <table class="table table-border table-hover table-striped">
 
     <%= render partial: 'group_orders_admin/order_by_users', collection: @pull_users, as: 'user' %>
+  <tr>
+    <th colspan="3"><h4>Итого</h4></th>
+    <th><h4><%= my_number_to_currency(@group_order.price) %></h4></th>
+  </tr>
 
   </table>
 </div>
