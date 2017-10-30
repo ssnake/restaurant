@@ -15,6 +15,7 @@ class GroupOrdersAdminController < ApplicationController
     # получаем коллекцию для просмотра и детализации блюдам
     elsif params[:how_to_view] == 'by_dish'
       @group_line_items = GroupLineItem.where(group_order_id: @group_order.id).group(:product_id)
+      set_dish_collection
     end
   end
 
@@ -37,7 +38,7 @@ class GroupOrdersAdminController < ApplicationController
     dish_hash.keys.each do |key|
       product = Product.find(key)
       quantity = dish_hash[key]
-      @dish << [product, quantity]
+      @dish << {product: product, quantity: quantity}
     end
   end
 
