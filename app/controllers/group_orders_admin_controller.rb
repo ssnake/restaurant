@@ -33,12 +33,12 @@ class GroupOrdersAdminController < ApplicationController
   end
 
   def set_dish_collection
-    @dish = []
+    @group_dishes = []
     dish_hash = GroupLineItem.where(group_order_id: @group_order.id).group(:product_id).sum(:quantity)
     dish_hash.keys.each do |key|
       product = Product.find(key)
       quantity = dish_hash[key]
-      @dish << {product: product, quantity: quantity}
+      @group_dishes << {product: product, quantity: quantity}
     end
   end
 

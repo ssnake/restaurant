@@ -1,15 +1,7 @@
-<thead>
-</thead>
-<%# dish.each do |i| %>
   <tr>
     <td><%= dish[:product].title %></td>
-    <td><%#= item.product.description %></td>
-    <td><%#= my_number_to_currency(item.product.price) %> x <%= dish[:quantity] %> шт</td>
-    <td><%#= my_number_to_currency(item.product.price * item.quantity) %></td>
+    <td><%= dish[:product].description %></td>
+    <td><%= my_number_to_currency(dish[:product].price) %> x <b><%= dish[:quantity] %> шт</b></td>
+    <td><%= my_number_to_currency(dish[:product].price * dish[:quantity]) %></td>
   </tr>
-  <%# price += (item.product.price * item.quantity) %>
-<%# end %>
-<tr>
-  <th colspan="3">Сумма с посетителя:</th>
-  <th><%#= my_number_to_currency(price) %></th>
-</tr>
+

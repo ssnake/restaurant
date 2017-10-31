@@ -6,7 +6,7 @@ ID заказа: <%= @group_order.id %><br/>
 Примечание к заказу: <%= @group_order.notice %><br/>
 Тип оплаты: <%= @group_order.pay_type %><br/>
 Когда заказ создан: <%= @group_order.created_at %><br/>
-<%= link_to 'Назад', group_orders_admin_index_path %><br/>
+<%= link_to 'Назад', group_orders_admin_index_path, class: "btn btn-primary btn-sm", style: "color: white" %><br/>
 ----------------------------------<br/>
 
 <% if params[:how_to_view] == 'by_user' %>

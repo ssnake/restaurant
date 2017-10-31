@@ -7,10 +7,6 @@
     <% else %>
       <%= link_to 'Restaurant "Developers Life"', store_index_path, class: 'navbar-brand', color: "#ff0033" %>
     <% end %>
-
-        <%# if user_login %>
-          <%#= link_to 'Моя корзина', cart_path(id: session[:cart_id]) %>
-        <%# end %>
  
       <ul class="nav navbar-nav">
 
@@ -19,7 +15,7 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_login %>
           <li id="cart-button">
-            <%= link_to 'Мой заказ', cart_path(id: @cart.id) if @cart %>
+            <%= link_to 'Моя корзина', cart_path(id: @cart.id) if @cart %>
           </li>
         <% end %>
 
