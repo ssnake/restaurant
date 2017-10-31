@@ -2,9 +2,9 @@
 </thead>
 <%# dish.each do |i| %>
   <tr>
-    <td><%#= dish[0][:product].title %></td>
+    <td><%= dish[:product].title %></td>
     <td><%#= item.product.description %></td>
-    <td><%#= my_number_to_currency(item.product.price) %> x <%#= item.quantity %> шт</td>
+    <td><%#= my_number_to_currency(item.product.price) %> x <%= dish[:quantity] %> шт</td>
     <td><%#= my_number_to_currency(item.product.price * item.quantity) %></td>
   </tr>
   <%# price += (item.product.price * item.quantity) %>
