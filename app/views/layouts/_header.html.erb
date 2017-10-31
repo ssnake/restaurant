@@ -27,7 +27,7 @@
         <% end %>
 
         <% if user_signed_in? %>
-          <li id="header_name">Здравствуйте, <%= current_user.name %>  | </li>
+          <li id="header_name" text-color="white">Здравствуйте, <%= current_user.name %>  | </li>
           <%= link_to 'Выйти', destroy_user_session_path, :method => :delete, class: "btn btn-primary btn-sm active" %>
         <% else %>
           <div class="btn-group" role="group" aria-label="Basic example">
