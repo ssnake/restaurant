@@ -10,25 +10,13 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require carts
- *= require_tree .
- *= require_self
+
  */
 
-@import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
 
-.btn {
-	color: white;
-}
 
-
-#header_name {
-	color: white;
-	vertical-align: center;
-	padding-top: 10px;
-}
 
 #navbar-admin {
 	color: red;

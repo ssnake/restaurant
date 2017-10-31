@@ -1,8 +1,9 @@
-<h1>Наше меню</h1> - для юзеров
+<h1>Наше меню</h1>
 
 <br/>
 
 <% if current_user %>
+  <%= link_to 'Просмотр сделанных мной заказов', orders_path %><br/>
   Группы наших заказчиков: <br/>
   <%= render partial: 'groups/group_list', collection: @all_groups, as: 'group' %> | 
   <%= link_to fa_icon(' plus-square') + 'Создать группу', new_group_path %>

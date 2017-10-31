@@ -65,7 +65,7 @@ gem 'devise-i18n'
 # russian formats gem (time, date///)
 gem 'russian'
 # integrate bootstrap
-gem 'bootstrap-sass'
+gem 'bootstrap', '~> 4.0.0.beta2.1'
 # icons gem
 gem 'font-awesome-rails'
 # add jquery

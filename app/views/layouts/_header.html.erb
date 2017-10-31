@@ -1,4 +1,4 @@
-<div class="navbar navbar-inverse navbar-static-top">
+<div class="navbar navbar-dark bg-dark navbar-static-top">
   <div class="container">
 
     <% if user_admin %>
@@ -14,7 +14,7 @@
     
       <ul class="nav navbar-nav navbar-right">
         <% if user_login %>
-          <li id="cart-button">
+          <li id="cart-button" class="nav-item active">
             <%= link_to 'Моя корзина', cart_path(id: @cart.id) if @cart %>
           </li>
         <% end %>
