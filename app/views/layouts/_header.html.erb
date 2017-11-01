@@ -1,41 +1,65 @@
 <div class="navbar navbar-dark bg-dark navbar-static-top">
   <div class="container">
 
-    <% if user_admin %>
-      <%= link_to 'Restaurant "Developers Life"', product_types_path, class: 'navbar-brand', color: "#ff0033" %>
-      <%= link_to 'admin panel mode', product_types_path, class: 'navbar-brand', id: 'navbar-admin' %>
-    <% else %>
-      <%= link_to 'Restaurant "Developers Life"', store_index_path, class: 'navbar-brand', color: "#ff0033" %>
-    <% end %>
+    <ul class="nav navbar-nav navbar-left">
+      <% if user_admin %>
+
+        <li class="nav-item">
+          <%= link_to 'Restaurant "Developers Life"', product_types_path, class: 'navbar-brand', color: "#ff0033" %>
+        </li>
+      
+        <li class="nav-item">
+          <%= link_to 'admin panel mode', product_types_path, class: 'navbar-brand', id: 'navbar-admin' %>
+        </li>
+
+      <% else %>
+      
+        <li class="nav-item">
+          <%= link_to 'Restaurant "Developers Life"', store_index_path, class: 'navbar-brand', color: "#ff0033" %>
+        </li>
+
+      <% end %>
+    </ul>
  
-      <ul class="nav navbar-nav">
-
-      </ul>
     
-      <ul class="nav navbar-nav navbar-right">
-        <% if user_login %>
-          <li id="cart-button" class="nav-item active">
-            <%= link_to 'Моя корзина', cart_path(id: @cart.id) if @cart %>
-          </li>
-        <% end %>
+    <ul class="nav justify-content-end">
 
-        <% if @group_cart %>
-          <li id="cart-button">
-            <%= link_to 'Заказ группы' + @group_cart.group.name, 
-            group_cart_path(group_id: @group.id, id: @group_cart.id)  %>
-          </li>
-        <% end %>
+      <% if user_login %>
 
-        <% if user_signed_in? %>
-          <li id="header_name" text-color="white">Здравствуйте, <%= current_user.name %>  | </li>
-          <%= link_to 'Выйти', destroy_user_session_path, :method => :delete, class: "btn btn-primary btn-sm active" %>
-        <% else %>
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <%= link_to 'Войти', new_user_session_path, class: "btn btn-primary btn-sm active" %> 
-            <%= link_to 'Зарегистрироваться', new_user_registration_path, class: "btn btn-success btn-sm active" %>
+        <li class="nav-item">
+          <%= link_to 'Моя корзина', (cart_path(id: @cart.id) if @cart), class: 'btn btn-success btn-sm' %>
+        </li>
+      <% end %>
+
+      <% if @group_cart %>
+        <li class="nav-item">
+          <%= link_to '| Предаказ группы' + @group_cart.group.name+ ' |', 
+          group_cart_path(group_id: @group.id, id: @group_cart.id)  %>
+        </li>
+      <% end %>
+
+      <% if user_signed_in? %>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Здравствуйте, <%= current_user.name %>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= link_to 'Мои оформленные заказы', orders_path, class: "dropdown-item" %>
+            <a class="dropdown-item" href="#">Мои оформленные групповые заказы</a>
+          </div>
         </div>
-        <% end %>
-      </ul>
-    </div>
+        
+        <li class="nav-item">
+          <%= link_to 'Выйти', destroy_user_session_path, :method => :delete, class: "btn btn-primary btn-sm active" %>
+        </li>
+
+      <% else %>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <%= link_to 'Войти', new_user_session_path, class: "btn btn-primary btn-sm active" %> 
+          <%= link_to 'Зарегистрироваться', new_user_registration_path, class: "btn btn-success btn-sm active" %>
+        </div>
+      <% end %>
+    </ul>
+
   </div>
 </div>
