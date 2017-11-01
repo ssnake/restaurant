@@ -88,3 +88,4 @@ class GroupOrdersController < ApplicationController
       item.update_all(group_order_id: @group_order.id, group_cart_id: nil)
     end
 end
+
