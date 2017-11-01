@@ -5,4 +5,15 @@ class ProductType < ApplicationRecord
   # название категории меню должно быть, и не длиннее 50 знаков
   validates :title, presence: { message: 'Поле не может быть пустым' }
   validates :title, length: {maximum: 30, message: 'Название не может быть длиннее 30 символов'}
+
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |aaa|
+        csv << aaa.attributes.values
+      end
+    end
+  end
 end
+
+

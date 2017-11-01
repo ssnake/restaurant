@@ -1,0 +1,6 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Product Types") do |sheet|
+  @products_all.each do |type|
+    sheet.add_row [type.id, type.title] 	
+  end
+end

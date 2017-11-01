@@ -10,6 +10,11 @@ class ProductTypesController < ApplicationController
 
   def index
   	@products_all = Product.all.order('title ASC')
+    respond_to do |format|
+      format.html
+      format.csv { send_data @product_types.to_csv }
+      format.xls
+    end
   end
 
 
