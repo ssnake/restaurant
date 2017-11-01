@@ -44,10 +44,11 @@ class Product < ApplicationRecord
 
   
   def self.to_csv(options = {})
+    desired_columns = ["id", "title", "description", "price", "product_type"]
     CSV.generate(options) do |csv|
-      csv << column_names
+      csv << desired_columns
       all.each do |product|
-        csv << product.attributes.values
+        csv << [product.id, product.title, product.description, product.price, product.product_type.title]
       end
     end
   end
