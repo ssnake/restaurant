@@ -1,33 +1,23 @@
-<p>
-  <strong>Название группы:</strong>
-  <%= @group_order.group_name %>
-</p>
+<h2>Детализация группового</h2>
 
-<p>
-  <strong>Главный заказчик:</strong>
-  <%= @group_order.name %>
-</p>
+ID заказа: <%= @group_order.id %><br/>
+Группа заказа: <%= @group_order.group_name %><br/>
+Создатель группы заказа: <%= @group_order.name %> | <%= @group_order.email %><br/>
+Примечание к заказу: <%= @group_order.notice %><br/>
+Тип оплаты: <%= @group_order.pay_type %><br/>
+Когда заказ создан: <%= @group_order.created_at %><br/>
+<%= link_to 'Просмотр по заказанным блюдам', group_order_path(group_id: @group_order.group_id, 
+    id: @group_order.id ), class: "btn btn-primary btn-sm", style: "color: white" %> | 
+<%= link_to 'Просмотр по заказчикам', group_order_path(group_id: @group_order.group_id, 
+    id: @group_order.id, how_to_view: 'by_user'), class: "btn btn-primary btn-sm", style: "color: white" %><br/>
+----------------------------------<br/>
 
-<p>
-  <strong>Почта:</strong>
-  <%= @group_order.email %>
-</p>
+<% if params[:how_to_view] == 'by_user' %>
+  <%= render 'group_orders_admin/show_by_users' %>
+<% else %>
+  <%= render 'group_orders_admin/show_by_dish' %>
+<% end %>
 
-<p>
-  <strong>Комментарии:</strong>
-  <%= @group_order.notice %>
-</p>
-
-<p>
-  <strong>Тип оплаты:</strong>
-  <%= @group_order.pay_type %>
-</p>
-
-Заказано:
-<br/>
-<%= render partial: 'group_orders/group_order', collection: @my_group_order, 
-		as: 'group_order' %>
--------------<br/>
-Итого: <%= my_number_to_currency(@group_order.price) %><br/>
 
 <%= link_to 'На главную', root_path %>
+

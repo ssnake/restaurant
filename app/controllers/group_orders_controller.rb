@@ -16,7 +16,14 @@ class GroupOrdersController < ApplicationController
   # GET /group_orders/1
   # GET /group_orders/1.json
   def show
-    @my_group_order = GroupLineItem.where(group_order_id: @group_order.id)
+    # если передан параметр 'by_user' то 
+    # получаем коллекцию для просмотра и детализации по юзерам
+    if params[:how_to_view] == 'by_user'
+      @pull_users = set_pull_users(@group_order.group_line_items)
+    else
+      @group_order_menu = GroupLineItem.where(group_order_id: @group_order.id)
+      set_dish_collection
+    end
   end
 
   # GET /group_orders/new
@@ -73,19 +80,40 @@ class GroupOrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_group_order
-      @group_order = GroupOrder.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_group_order
+    @group_order = GroupOrder.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def group_order_params
-      params.require(:group_order).permit(:notice, :pay_type)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def group_order_params
+    params.require(:group_order).permit(:notice, :pay_type)
+  end
 
-    def set_group_order_id_and_drop_group_cart_id
-      item = GroupLineItem.where(group_cart_id: @group_cart.id)
-      item.update_all(group_order_id: @group_order.id, group_cart_id: nil)
+  def set_group_order_id_and_drop_group_cart_id
+    item = GroupLineItem.where(group_cart_id: @group_cart.id)
+    item.update_all(group_order_id: @group_order.id, group_cart_id: nil)
+  end
+
+
+  def set_dish_collection
+    @group_dishes = []
+    dish_hash = GroupLineItem.where(group_order_id: @group_order.id).group(:product_id).sum(:quantity)
+    dish_hash.keys.each do |key|
+      product = Product.find(key)
+      quantity = dish_hash[key]
+      @group_dishes << {product: product, quantity: quantity}
     end
+  end
+
+
+  def set_pull_users(group_line_items)
+    pull_users = []
+    group_line_items.each do |item|
+      pull_users << item.user
+    end
+    pull_users.uniq
+  end
+
 end
 
