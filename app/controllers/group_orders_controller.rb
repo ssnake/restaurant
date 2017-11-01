@@ -22,7 +22,7 @@ class GroupOrdersController < ApplicationController
   # GET /group_orders/new
   def new
     if @group_cart.group_line_items.empty?
-      redirect_to group_store_index_url, alert: 'Нельзя создавать пустой зкакз, купите же что нибудь!'
+      redirect_to group_store_index_url, alert: 'Нельзя создавать пустой заказ, купите же что нибудь!'
       return
     end
     @group_order = GroupOrder.new

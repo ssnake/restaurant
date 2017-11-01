@@ -20,7 +20,8 @@
             <%= member.user.name + '  ' %>
           <% end %>
         </td>
-        <td><%= link_to 'Подробнее', group %></td>
+        <td><%= link_to 'Подробнее', group_order_path(group_id: group.id, 
+                id: GroupOrder.find(group.id).id ) %></td>
       </tr>
     <% end %>
   </tbody>
