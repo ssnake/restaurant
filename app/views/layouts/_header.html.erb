@@ -33,8 +33,9 @@
 
       <% if @group_cart %>
         <li class="nav-item">
-          <%= link_to '| Предаказ группы' + @group_cart.group.name+ ' |', 
-          group_cart_path(group_id: @group.id, id: @group_cart.id)  %>
+          <%= link_to '| Корзина группы ' + @group_cart.group.name+ ' |', 
+          group_cart_path(group_id: @group.id, id: @group_cart.id), 
+          class: 'btn btn-success btn-sm' %>
         </li>
       <% end %>
 
@@ -45,7 +46,7 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <%= link_to 'Мои оформленные заказы', orders_path, class: "dropdown-item" %>
-            <a class="dropdown-item" href="#">Мои оформленные групповые заказы</a>
+            <%= link_to 'Мои оформленные заказы по группам', groups_path, class: "dropdown-item" %>
           </div>
         </div>
         

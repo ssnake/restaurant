@@ -5,10 +5,12 @@ class GroupOrdersController < ApplicationController
   before_action :set_group_cart #, except: [:destroy]
   before_action :set_group_order, only: [:show, :edit, :update, :destroy]
 
-  # GET /group_orders
-  # GET /group_orders.json
+  
   def index
-    @group_orders = GroupOrder.all
+    #@group_orders = GroupOrder.all
+    # отбираем группы, в которых состоит данный юзер
+    @groups = Member.joins(:group).where(user_id: current_user.id)
+
   end
 
   # GET /group_orders/1
@@ -20,7 +22,7 @@ class GroupOrdersController < ApplicationController
   # GET /group_orders/new
   def new
     if @group_cart.group_line_items.empty?
-      redirect_to group_store_index(params[:group_id]), alert: 'Нельзя создавать пустой зкакз, купите же что нибудь!'
+      redirect_to group_store_index_url, alert: 'Нельзя создавать пустой зкакз, купите же что нибудь!'
       return
     end
     @group_order = GroupOrder.new
