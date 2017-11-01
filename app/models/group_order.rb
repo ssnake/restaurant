@@ -1,6 +1,7 @@
 class GroupOrder < ApplicationRecord
   
   has_many :group_line_items, dependent: :destroy
+  has_one :group
   # определяем массив видов оплаты
   PAYMENT_TYPES = ["наличными", "кредитной картой"]
 
@@ -14,6 +15,7 @@ class GroupOrder < ApplicationRecord
   	self.name = group.user.name
   	self.email = group.user.email
     self.group_name = group.name
+    self.group_id = group.id
   end
 
   def set_price(group_cart)

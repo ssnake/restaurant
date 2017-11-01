@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171028193809) do
+ActiveRecord::Schema.define(version: 20171101101454) do
 
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 20171028193809) do
     t.datetime "updated_at", null: false
     t.decimal "price"
     t.text "group_name"
+    t.integer "group_id"
+    t.index ["group_id"], name: "index_group_orders_on_group_id"
   end
 
   create_table "groups", force: :cascade do |t|
