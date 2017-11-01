@@ -12,7 +12,7 @@ class ProductTypesController < ApplicationController
   	@products_all = Product.all.order('title ASC')
     respond_to do |format|
       format.html
-      format.csv { send_data @product_types.to_csv }
+      format.csv { send_data @products_all.to_csv }
       format.xls
     end
   end
