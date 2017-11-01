@@ -13,7 +13,7 @@ class ProductTypesController < ApplicationController
     respond_to do |format|
       format.html
       format.csv { send_data @products_all.to_csv }
-      format.xls
+      # format.xls
     end
   end
 

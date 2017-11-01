@@ -2,6 +2,10 @@ class SingleOrdersController < ApplicationController
   def index
   	@single_orders = Order.all.order('created_at ASC')
   	set_line_items
+    respond_to do |format|
+      format.html
+      format.csv { send_data @line_item.to_csv}
+    end
   end
 
   def show
@@ -15,9 +19,11 @@ class SingleOrdersController < ApplicationController
   private
 
   def set_line_items
-  	@line_item = []
+    @mass = []
   	@single_orders.each do |order|
-  	  @line_item << LineItem.where(order_id: order.id)
+      @mass << order.id
     end
+  	@line_item = LineItem.where(order_id: @mass)
+    @mass = nil
   end
 end
