@@ -36,26 +36,29 @@
         </li>
       <% end %>
 
-      <% if user_login %>
-
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Здравствуйте, <%= current_user.name %>
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <%= link_to 'Мои оформленные заказы', orders_path, class: "dropdown-item" %>
-            <%= link_to 'Мои оформленные заказы по группам', groups_path, class: "dropdown-item" %>
-          </div>
-        </div>
-
-      <% elsif user_login and current_user.admin %>
+      <% if user_admin %>
         <li class="nav-item">
           Вы вошли как администратор  |
         </li>
-        
         <li class="nav-item">
           <%= link_to 'Выйти', destroy_user_session_path, :method => :delete, class: "btn btn-primary btn-sm active" %>
         </li>
+
+
+        <% elsif user_login %>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Здравствуйте, <%= current_user.name %>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to 'Мои оформленные заказы', orders_path, class: "dropdown-item" %>
+              <%= link_to 'Мои оформленные заказы по группам', groups_path, class: "dropdown-item" %>
+            </div>
+          </div>
+        <li class="nav-item">
+          <%= link_to 'Выйти', destroy_user_session_path, :method => :delete, class: "btn btn-primary btn-sm active" %>
+        </li>
+
 
       <% else %>
         <div class="btn-group" role="group" aria-label="Basic example">

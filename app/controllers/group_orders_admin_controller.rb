@@ -1,6 +1,11 @@
 class GroupOrdersAdminController < ApplicationController
   def index
   	@group_orders = GroupOrder.all.order("created_at ASC")
+    @group_line_items = GroupLineItem.where(group_order_id: set_group_orders_ids).order(:group_order_id)
+    respond_to do |format|
+      format.html
+      format.csv { send_data @group_line_items.to_csv}
+    end
   end
 
   def show
@@ -40,6 +45,10 @@ class GroupOrdersAdminController < ApplicationController
       quantity = dish_hash[key]
       @group_dishes << {product: product, quantity: quantity}
     end
+  end
+
+  def set_group_orders_ids
+    GroupOrder.all.ids
   end
 
 end
