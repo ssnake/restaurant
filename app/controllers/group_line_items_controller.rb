@@ -37,15 +37,21 @@ class GroupLineItemsController < ApplicationController
 
   def update
     @group_line_item.update(group_line_item_quantity_params)
-    
-    redirect_to group_cart_path(group_id: @group_line_item.group_cart.group_id, 
-      id: @group_line_item.id), notice: 'Количество обновлено' 
+    respond_to do |f|
+      f.html { redirect_to group_cart_path(group_id: @group_line_item.group_cart.group_id, 
+            id: @group_line_item.id), notice: 'Количество обновлено' }
+      #f.js
+    end
   end
 
 
   def destroy
-    @group_line_item.destroy
-    redirect_to group_cart_path(id: @group_cart.id), notice: 'Блюдо удалено из заказа'
+    if @group_line_item.destroy
+      respond_to do |f|
+        f.html {redirect_to group_cart_path(id: @group_cart.id), notice: 'Блюдо удалено из заказа'}
+        f.js
+      end
+    end
   end
 
   private
