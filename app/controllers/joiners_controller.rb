@@ -1,30 +1,20 @@
 class JoinersController < ApplicationController
-  before_action :set_joiner, only: [:show, :edit, :update, :destroy]
+  before_action :set_joiner, only: [:destroy]
 
-  # GET /joiners
-  # GET /joiners.json
+  # выбор юзеров, давших запрос на вступление в группу
   def index
     @joiners = Joiner.all
   end
 
-  # GET /joiners/1
-  # GET /joiners/1.json
-  def show
-  end
 
-  # GET /joiners/new
+  # создание нового запроса
   def new
     @joiner = Joiner.new
   end
 
-  # GET /joiners/1/edit
-  def edit
-  end
 
-  # POST /joiners
-  # POST /joiners.json
+  # создаем запись запроса на вступление в группу
   def create
-        #product = Product.find(params[:product_id])
     @joiner = Joiner.new(group_id: params[:group_id], user_id: params[:user_id])
     if @joiner.save
       redirect_to root_path, notice: 'Вы дали запрос на вступление в группу'
@@ -33,22 +23,8 @@ class JoinersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /joiners/1
-  # PATCH/PUT /joiners/1.json
-  def update
-    respond_to do |format|
-      if @joiner.update(joiner_params)
-        format.html { redirect_to @joiner, notice: 'Joiner was successfully updated.' }
-        format.json { render :show, status: :ok, location: @joiner }
-      else
-        format.html { render :edit }
-        format.json { render json: @joiner.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
-  # DELETE /joiners/1
-  # DELETE /joiners/1.json
+  # удаление запроса на вступление в группу
   def destroy
     @joiner.destroy
     redirect_to group_path(@joiner.group_id), 
@@ -56,12 +32,12 @@ class JoinersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # установить подавшего запрос на вступление в группу
     def set_joiner
       @joiner = Joiner.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # получение параметров подавшего уведомление на вступление в группу
     def joiner_params
       params.require(:joiner).permit(:group_id, :user_id)
     end

@@ -1,8 +1,7 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update]
 
-  # GET /members
-  # GET /members.json
+  # получить всех членов
   def index
     @members = Member.all
   end
@@ -21,8 +20,8 @@ class MembersController < ApplicationController
   def edit
   end
 
-  # POST /members
-  # POST /members.json
+
+  # создание членства в группе
   def create
     @member = Member.new(group_id: params[:group_id], user_id: params[:user_id])
     if @member.save
@@ -55,12 +54,12 @@ class MembersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # устанавливаем члена группы
     def set_member
       @member = Member.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # получение параметров для члена группы
     def member_params
       params.require(:member).permit(:group_id, :user_id)
     end

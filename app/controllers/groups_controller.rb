@@ -7,31 +7,26 @@ class GroupsController < ApplicationController
   before_action :set_group_cart, only: [:show]
 
 
-  # GET /groups
-  # GET /groups.json
+  # просмотр всех групп
   def index
     @groups = Group.all
   end
 
-  # GET /groups/1
-  # GET /groups/1.json
+  # показ группы
   def show
   end
 
-  # GET /groups/new
+  # создаем новую группу
   def new
-    #@group = Group.new
     @new_group = @user.groups.build
   end
 
-  # GET /groups/1/edit
+  # редактирование группы
   def edit
   end
 
-  # POST /groups
-  # POST /groups.json
+  # создание новой группы
   def create
-    #@group = Group.new(group_params)
     @new_group = @user.groups.build(group_params)
     respond_to do |format|
       if @new_group.save
@@ -46,8 +41,7 @@ class GroupsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /groups/1
-  # PATCH/PUT /groups/1.json
+  # обновление параметров группы
   def update
     respond_to do |format|
       if @group.update(group_params)
@@ -60,8 +54,8 @@ class GroupsController < ApplicationController
     end
   end
 
-  # DELETE /groups/1
-  # DELETE /groups/1.json
+  
+  # удаление группы
   def destroy
     @group.destroy
     respond_to do |format|
@@ -71,12 +65,12 @@ class GroupsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # устанавливаем группу
     def set_group
       @group = Group.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # установить параметры группы через белый список
     def group_params
       params.require(:group).permit(:name)
     end
@@ -85,6 +79,8 @@ class GroupsController < ApplicationController
       @user = current_user
     end
 
+
+    # выбираем юзеров, пославших уведомление на вступление в группу
     def set_joiners
       @joiners = Joiner.where(group_id: @group.id)
     end
