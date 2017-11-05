@@ -4,20 +4,17 @@ class OrdersController < ApplicationController
   before_action :set_cart, only: [:new, :create]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
-  # GET /orders
-  # GET /orders.json
+  
+  # получаем список всех заказов
   def index
     @orders = Order.where(name: current_user.name)
   end
 
-  # GET /orders/1
-  # GET /orders/1.json
+  
   def show
-    #@my_order = LineItem.where(order_id: @order.id)
-
   end
 
-  # GET /orders/new
+  # создаем новый заказ
   def new
     # выбиваем ошибку при попытке создать заказ с пустой корзиной
     if @cart.line_items.empty?
@@ -31,8 +28,7 @@ class OrdersController < ApplicationController
   def edit
   end
 
-  # POST /orders
-  # POST /orders.json
+  # сохранение оформленого заказа
   def create
     @order = Order.new(order_params)
     # устанавливаем имя и емаил из юзера
@@ -41,7 +37,10 @@ class OrdersController < ApplicationController
     @order.set_price(@cart)
     
     if @order.save
+      # если заказ сохранен то выполнить метод для перестройки соединительной
+      # таблицы LineItem
       set_order_id_and_drop_cart_id
+      # удаляем ненужную корзину
       Cart.destroy(@cart.id)
       redirect_to order_path(@order.id), notice: 'Спасибо за Ваш заказ!' 
     else 
@@ -50,22 +49,9 @@ class OrdersController < ApplicationController
 
   end
 
-  # PATCH/PUT /orders/1
-  # PATCH/PUT /orders/1.json
-  def update
-    respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
-        format.json { render :show, status: :ok, location: @order }
-      else
-        format.html { render :edit }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
-  # DELETE /orders/1
-  # DELETE /orders/1.json
+
+
   def destroy
     @order.destroy
     respond_to do |format|
@@ -75,16 +61,18 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # устанавливаем текущий заказ
     def set_order
       @order = Order.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # получаем параметры из формы по белому списку
     def order_params
       params.require(:order).permit(:notice, :pay_type)
     end
 
+    # форматируем таблицу LineItem - стираем id корзины на позициях товара и назначаем
+    # id заказа
     def set_order_id_and_drop_cart_id
       item = LineItem.where(cart_id: @cart.id)
       item.update_all(order_id: @order.id, cart_id: nil)

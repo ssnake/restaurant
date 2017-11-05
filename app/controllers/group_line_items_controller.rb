@@ -40,7 +40,10 @@ class GroupLineItemsController < ApplicationController
     @group_line_item.user_id = current_user.id
     # сохраняем запись
     @group_line_item.save
-    redirect_to group_cart_path(id: @group_cart.id), notice: 'Блюдо добавлено в предзаказ (корзину)'
+    respond_to do |f|
+      f.html {redirect_to group_cart_path(id: @group_cart.id), notice: 'Блюдо добавлено в предзаказ (корзину)'}
+      f.js
+    end
   end
 
 
