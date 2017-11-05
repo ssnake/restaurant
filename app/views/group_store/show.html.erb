@@ -2,8 +2,10 @@
 
 <br/>
 
-Текущая группа: <%= @group.name %> | 
-<%= link_to 'Заказ группы', group_cart_path(group_id: @group.id, id: @group_cart.id)  %>
+<b>Текущая группа: <%= @group.name %> | </b>
+<%= link_to 'Просмотр группы', group_path(id: @group.id) %> |
+<%= link_to 'Заказ группы', group_cart_path(group_id: @group.id, id: @group_cart.id)  %> | 
+<%= link_to 'Выйти из группы к одиночному заказу', root_path %>
 <br/>
 
 <hr/>

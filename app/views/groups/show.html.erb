@@ -43,4 +43,9 @@
 
 <%= link_to 'Меню общего заказа', group_store_index_path(group_id: @group.id) %> |
 
-<%= link_to 'Назад', root_path %>
+<%= link_to 'Назад', root_path %> |
+
+<!--
+<%= link_to 'Удалиться из группы', member_path(user_id: current_user.id, group_id: @group.id), 
+    method: :delete, data: {confirm: 'Действительно желаете удалиться?'} %>
+  -->

@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_action :set_member, only: [:show, :edit, :update, :destroy]
+  before_action :set_member, only: [:show, :edit, :update]
 
   # GET /members
   # GET /members.json
@@ -49,11 +49,9 @@ class MembersController < ApplicationController
   # DELETE /members/1
   # DELETE /members/1.json
   def destroy
-    @member.destroy
-    respond_to do |format|
-      format.html { redirect_to members_url, notice: 'Member was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    #@member = Member.where(user_id: params[:user_id], group_id: params[:group_id])
+    #@member.destroy
+    #redirect_to root_path, notice: 'Вы удалились из группы'
   end
 
   private
