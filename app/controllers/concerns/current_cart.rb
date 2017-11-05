@@ -37,5 +37,11 @@ module CurrentCart
     @group = Group.find(params[:group_id])
   end
 
+  def update_cart
+    ActionCable.server.broadcast("LineChannel", {
+      title: 'Update Cart',
+      body: 'Update Cart body'
+      })
+  end
  
 end
