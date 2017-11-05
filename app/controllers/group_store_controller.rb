@@ -6,6 +6,8 @@ class GroupStoreController < ApplicationController
   before_action :set_group_cart
 	before_action :set_product_types
 
+  before_action :set_quantity_and_price
+
   # выбрать все типы продуктов
   def index
   	@products_all = Product.order(:title)
@@ -26,5 +28,6 @@ class GroupStoreController < ApplicationController
   def set_product_types
     @product_types = ProductType.all
   end
+
 
 end
