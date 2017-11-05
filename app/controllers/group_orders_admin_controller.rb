@@ -1,13 +1,17 @@
 class GroupOrdersAdminController < ApplicationController
+
+  # выбор всех групповых заказов для просмотра в меню админа
   def index
   	@group_orders = GroupOrder.all.order("created_at ASC")
     @group_line_items = GroupLineItem.where(group_order_id: set_group_orders_ids).order(:group_order_id)
+    # создаем вариант ответа в csv формате
     respond_to do |format|
       format.html
       format.csv { send_data @group_line_items.to_csv}
     end
   end
 
+  # устанавливаем групповой заказ для просмотра
   def show
     @group_order = GroupOrder.find(params[:id])
 
@@ -29,6 +33,7 @@ class GroupOrdersAdminController < ApplicationController
 
   private
 
+  # устанавливаем список юзеров для группировки и просмотра заказа по заказчикам(юзерам)
   def set_pull_users(group_line_items)
   	pull_users = []
   	group_line_items.each do |item|
@@ -37,6 +42,8 @@ class GroupOrdersAdminController < ApplicationController
     pull_users.uniq
   end
 
+
+  # устанавливаем коллекцию блюд для просмотра позиций заказанных товаров
   def set_dish_collection
     @group_dishes = []
     dish_hash = GroupLineItem.where(group_order_id: @group_order.id).group(:product_id).sum(:quantity)
@@ -47,6 +54,8 @@ class GroupOrdersAdminController < ApplicationController
     end
   end
 
+  # метод для экшена index - установка всех id заказов для выборки коллекции 
+  # групповых товарных позиций для использования в партиалах
   def set_group_orders_ids
     GroupOrder.all.ids
   end

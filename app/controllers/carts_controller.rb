@@ -1,78 +1,56 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  before_action :set_cart, only: [:show, :edit, :destroy]
   # выдаем исключение если кто то пытается зайти в несуществующую корзину в строке браузера
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
-
-  # GET /carts
-  # GET /carts.json
+ 
+  # устанавливаем все корзины
   def index
     @carts = Cart.all
   end
 
-  # GET /carts/1
-  # GET /carts/1.json
+
   def show
   end
 
-  # GET /carts/new
+  # создаем новый экземпляр корзины
   def new
     @cart = Cart.new
   end
 
-  # GET /carts/1/edit
+  
   def edit
   end
 
-  # POST /carts
-  # POST /carts.json
+  
+  # создание корзины
   def create
     @cart = Cart.new(cart_params)
 
-    respond_to do |format|
-      if @cart.save
-        format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
-        format.json { render :show, status: :created, location: @cart }
-      else
-        format.html { render :new }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
+    if @cart.save
+      redirect_to @cart, notice: 'Cart was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /carts/1
-  # PATCH/PUT /carts/1.json
-  def update
-    respond_to do |format|
-      if @cart.update(cart_params)
-        format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
-        format.json { render :show, status: :ok, location: @cart }
-      else
-        format.html { render :edit }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  
 
-  # DELETE /carts/1
-  # DELETE /carts/1.json
+  # очистка корзины заказов
   def destroy
     # удалить корзину если ее id совпадает с id юзера
     # чтобы не удалиласть корзина другого пользователя
     @cart.destroy if @cart.user_id == current_user.id
     session[:cart_id] = nil
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Ваша корзина заказа очищена' }
-      format.json { head :no_content }
-    end
+    redirect_to root_path, notice: 'Ваша корзина заказа очищена'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # устанавливаем текущую корзину
     def set_cart
       @cart = Cart.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # получаем пустышку параметров корзины
     def cart_params
       params.fetch(:cart, {})
     end

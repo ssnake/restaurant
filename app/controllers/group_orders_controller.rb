@@ -1,5 +1,5 @@
 class GroupOrdersController < ApplicationController
-  # устанавливаем корзину
+  # устанавливаем корзину через модуль CurrentCart
   include CurrentCart
   before_action :set_current_group #, except: [:destroy]
   before_action :set_group_cart #, except: [:destroy]
@@ -7,14 +7,12 @@ class GroupOrdersController < ApplicationController
 
   
   def index
-    #@group_orders = GroupOrder.all
     # отбираем группы, в которых состоит данный юзер
     @groups = Member.joins(:group).where(user_id: current_user.id)
 
   end
 
-  # GET /group_orders/1
-  # GET /group_orders/1.json
+  # просмотр корзины юзером
   def show
     # если передан параметр 'by_user' то 
     # получаем коллекцию для просмотра и детализации по юзерам
@@ -26,27 +24,33 @@ class GroupOrdersController < ApplicationController
     end
   end
 
-  # GET /group_orders/new
+  # создание нового заказа (в случае если заказ пустой то не даем его создавать)
   def new
     if @group_cart.group_line_items.empty?
       redirect_to group_store_index_url, alert: 'Нельзя создавать пустой заказ, купите же что нибудь!'
       return
     end
+    # перед оформлением заказа создаем пустой экземпляр
     @group_order = GroupOrder.new
   end
 
-  # GET /group_orders/1/edit
   def edit
   end
 
-  # POST /group_orders
-  # POST /group_orders.json
+  # создание заказа
   def create
+    # получаем параметры
     @group_order = GroupOrder.new(group_order_params)
+    # устанавливаем аттрибуты группы
     @group_order.set_order_attr(@group)
+    # устанавливаем общую стоимость заказа
     @group_order.set_price(@group_cart)
+    # если заказ сохранен
     if @group_order.save
+      # в соединительной таблице GroupLineItems стираем id корзины
+      # и назначаем id группового заказа для каждой позиции
       set_group_order_id_and_drop_group_cart_id
+      # после обновления таблицы в БД удаляем ненужную корзину покупок
       GroupCart.destroy(@group_cart.id)
       redirect_to group_order_path(id: @group_order.id), notice: 'Спасибо за Ваш заказ!'
     else
@@ -55,47 +59,27 @@ class GroupOrdersController < ApplicationController
 
   end
 
-  # PATCH/PUT /group_orders/1
-  # PATCH/PUT /group_orders/1.json
-  def update
-    respond_to do |format|
-      if @group_order.update(group_order_params)
-        format.html { redirect_to @group_order, notice: 'Group order was successfully updated.' }
-        format.json { render :show, status: :ok, location: @group_order }
-      else
-        format.html { render :edit }
-        format.json { render json: @group_order.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /group_orders/1
-  # DELETE /group_orders/1.json
-  def destroy
-    @group_order.destroy
-    respond_to do |format|
-      format.html { redirect_to group_orders_url, notice: 'Group order was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+  # установить групповой заказ
   def set_group_order
     @group_order = GroupOrder.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # получение параметров заказа из белого списка
   def group_order_params
     params.require(:group_order).permit(:notice, :pay_type)
   end
 
+  # в соединительной таблице GroupLineItems стираем id корзины
+  # и назначаем id группового заказа для каждой позиции
   def set_group_order_id_and_drop_group_cart_id
     item = GroupLineItem.where(group_cart_id: @group_cart.id)
     item.update_all(group_order_id: @group_order.id, group_cart_id: nil)
   end
 
 
+  # устанавливаем коллекцию блюд для просмотра позиций заказанных товаров
   def set_dish_collection
     @group_dishes = []
     dish_hash = GroupLineItem.where(group_order_id: @group_order.id).group(:product_id).sum(:quantity)
@@ -106,7 +90,8 @@ class GroupOrdersController < ApplicationController
     end
   end
 
-
+  
+  # устанавливаем список юзеров для группировки и просмотра заказа по заказчикам(юзерам)
   def set_pull_users(group_line_items)
     pull_users = []
     group_line_items.each do |item|

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  
+  # описание параметров входа и регистрации в системе для гема devise
   def configure_permitted_parameters
 
     devise_parameter_sanitizer.permit(:sign_in, keys: [:name, :password])
